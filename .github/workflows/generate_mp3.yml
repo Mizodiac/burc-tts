@@ -1,7 +1,7 @@
 name: Generate Burç MP3s
 
 on:
-  workflow_dispatch:  # Manuel başlatmak için
+  workflow_dispatch:
 
 jobs:
   build_mp3:
@@ -25,7 +25,7 @@ jobs:
         run: python generate_missing_mp3.py
 
       - name: Upload MP3s as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: burc-mp3s
           path: mp3/
