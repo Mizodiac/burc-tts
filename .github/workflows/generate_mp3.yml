@@ -1,0 +1,31 @@
+name: Generate Burç MP3s
+
+on:
+  workflow_dispatch:  # Manuel başlatmak için
+
+jobs:
+  build_mp3:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install openai
+
+      - name: Run MP3 generator
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python generate_missing_mp3.py
+
+      - name: Upload MP3s as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: burc-mp3s
+          path: mp3/
