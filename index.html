@@ -7,45 +7,33 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div id="zodiac-container">
+    <img src="zodiac-background.jpg" id="zodiac-bg">
 
-<div id="zodiac-container">
+    <img id="burc-simge" class="hidden">
+    <img id="element-icon" class="hidden">
+    <video id="gezegen-video" class="hidden" muted></video>
+    <div id="ozellikler-display" class="hidden"></div>
+    <div id="sayi-display" class="hidden"></div>
 
-  <!-- Arka Plan -->
-  <img src="zodiac-background.jpg" id="zodiac-bg">
+    <button id="play-btn">Burcunu Dinle ve Göster!</button>
 
-  <!-- Burç -->
-  <img id="burc-simge" class="hidden">
-
-  <!-- Element -->
-  <img id="element-icon" class="hidden">
-
-  <!-- Özellikler -->
-  <div id="ozellikler-display" class="hidden"></div>
-
-  <!-- Sayılar -->
-  <div id="sayi-display" class="hidden"></div>
-
-  <!-- Gezegen Video -->
-  <video id="gezegen-video" class="hidden" muted></video>
-
-  <!-- Butonlar -->
-  <div class="buttons-container">
-    <button class="burc-btn" data-burc="koc">Koç</button>
-    <button class="burc-btn" data-burc="boga">Boğa</button>
-    <button class="burc-btn" data-burc="ikizler">İkizler</button>
-    <button class="burc-btn" data-burc="yengec">Yengeç</button>
-    <button class="burc-btn" data-burc="aslan">Aslan</button>
-    <button class="burc-btn" data-burc="basak">Başak</button>
-    <button class="burc-btn" data-burc="terazi">Terazi</button>
-    <button class="burc-btn" data-burc="akrep">Akrep</button>
-    <button class="burc-btn" data-burc="yay">Yay</button>
-    <button class="burc-btn" data-burc="oglak">Oğlak</button>
-    <button class="burc-btn" data-burc="kova">Kova</button>
-    <button class="burc-btn" data-burc="balik">Balık</button>
+    <div id="test-buttons">
+      <button onclick='runShow("koc")'>Koç</button>
+      <button onclick='runShow("boga")'>Boğa</button>
+      <button onclick='runShow("ikizler")'>İkizler</button>
+      <button onclick='runShow("yengec")'>Yengeç</button>
+      <button onclick='runShow("aslan")'>Aslan</button>
+      <button onclick='runShow("basak")'>Başak</button>
+      <button onclick='runShow("terazi")'>Terazi</button>
+      <button onclick='runShow("akrep")'>Akrep</button>
+      <button onclick='runShow("yay")'>Yay</button>
+      <button onclick='runShow("oglak")'>Oğlak</button>
+      <button onclick='runShow("kova")'>Kova</button>
+      <button onclick='runShow("balik")'>Balık</button>
+    </div>
   </div>
 
-</div>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
