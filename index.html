@@ -16,9 +16,6 @@
     <!-- 🧿 BURÇ -->
     <img id="burc-simge" class="hidden">
 
-    <!-- 🪐 GEZEGEN -->
-    <img id="gezegen-gif" class="hidden">
-
     <!-- 🌿 ELEMENT -->
     <img id="element-icon" class="hidden">
 
@@ -28,11 +25,26 @@
     <!-- 🔢 SAYI -->
     <div id="sayi-display" class="hidden"></div>
 
-    <!-- 🎤 BUTON -->
+    <!-- 🎤 SES BUTONU -->
     <button id="play-btn">Burcunu Dinle ve Göster!</button>
 
-    <!-- 🔹 TEST BUTONLARI -->
-    <div id="test-buttons" style="position:absolute; top:5%; left:5%; z-index:5; background:rgba(0,0,0,0.5); padding:10px; border-radius:10px; display:flex; flex-wrap:wrap; gap:5px;">
+    <!-- 🔹 TEST BUTONLARI (DÜZELTİLDİ) -->
+    <div id="test-buttons" style="
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      z-index: 5;
+      background: rgba(0,0,0,0.6);
+      padding: 10px;
+      border-radius: 10px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px;
+      max-height: 40%;
+      overflow-y: auto;
+    ">
+
       <button onclick='runShow("koc")'>Koç</button>
       <button onclick='runShow("boga")'>Boğa</button>
       <button onclick='runShow("ikizler")'>İkizler</button>
@@ -45,6 +57,7 @@
       <button onclick='runShow("oglak")'>Oğlak</button>
       <button onclick='runShow("kova")'>Kova</button>
       <button onclick='runShow("balik")'>Balık</button>
+
     </div>
 
   </div>
