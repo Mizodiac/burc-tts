@@ -1,0 +1,59 @@
+# .github/workflows/download_icons.yml
+name: Download Planet & Element Icons
+
+on:
+  workflow_dispatch:
+
+jobs:
+  download_icons:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install requests
+        run: pip install requests
+
+      - name: Download planet & element icons
+        run: |
+          python - << 'EOF'
+          import os
+          import requests
+          from pathlib import Path
+
+          icons_folder = Path("icons")
+          icons_folder.mkdir(exist_ok=True)
+
+          images = {
+              "mars.png": "https://upload.wikimedia.org/wikipedia/commons/0/02/Mars_symbol.svg",
+              "venus.png": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Venus_symbol.svg",
+              "merkur.png": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_symbol.svg",
+              "ay.png": "https://upload.wikimedia.org/wikipedia/commons/9/97/Moon_symbol.svg",
+              "gunes.png": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Sun_symbol.svg",
+              "jupiter.png": "https://upload.wikimedia.org/wikipedia/commons/2/20/Jupiter_symbol.svg",
+              "saturn.png": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Saturn_symbol.svg",
+              "uranus.png": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Uranus_symbol.svg",
+              "neptun.png": "https://upload.wikimedia.org/wikipedia/commons/5/55/Neptune_symbol.svg",
+              "ates.png": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Fire_icon.svg",
+              "toprak.png": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Earth_element_symbol.svg",
+              "hava.png": "https://upload.wikimedia.org/wikipedia/commons/0/01/Air_element_symbol.svg",
+              "su.png": "https://upload.wikimedia.org/wikipedia/commons/4/46/Water_element_symbol.svg",
+          }
+
+          for filename, url in images.items():
+              path = icons_folder / filename
+              if path.exists():
+                  print(f"{filename} zaten var, atlanıyor.")
+                  continue
+              r = requests.get(url)
+              r.raise_for_status()
+              with open(path, "wb") as f:
+                  f.write(r.content)
+              print(f"{filename} indirildi.")
+          EOF
