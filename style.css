@@ -1,26 +1,121 @@
+/* 🌍 GENEL AYAR */
 body, html {
-  margin: 0; padding: 0; width: 100%; height: 100%;
-  font-family: sans-serif; overflow: hidden; background: #000;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: sans-serif;
+  overflow: hidden;
+  background: #000;
 }
 
-#zodiac-container { position: relative; width: 100%; height: 100%; }
+/* 🎬 ANA KONTEYNER */
+#zodiac-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
 
-#zodiac-bg { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 0; }
+/* 🖼️ ARKA PLAN */
+#zodiac-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
 
-#burc-simge { position: absolute; top: 20%; left: 50%; transform: translateX(-50%); width: 150px; z-index: 2; }
+/* ✨ ORTA ALAN */
+.center-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 2;
+}
 
-#element-icon { position: absolute; top: 45%; right: 25%; width: 120px; z-index: 2; }
+/* 🧿 BURÇ SİMGE */
+#burc-simge {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  z-index: 2;
+}
 
-#gezegen-video { position: absolute; top: 45%; left: 25%; width: 120px; z-index: 2; display: none; }
+/* 🪐 GEZEGEN VIDEO */
+#gezegen-video {
+  position: absolute;
+  top: 45%;
+  left: 25%;
+  width: 120px;
+  z-index: 2;
+  display: none;
+}
 
-#ozellikler-display { position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%); color: white; font-size: 20px; background: rgba(0,0,0,0.6); padding: 10px 20px; border-radius: 10px; z-index: 2; }
+/* 🌿 ELEMENT */
+#element-icon {
+  position: absolute;
+  top: 45%;
+  right: 25%;
+  width: 120px;
+  z-index: 2;
+}
 
-#sayi-display { position: absolute; bottom: 15%; left: 50%; transform: translateX(-50%); color: #ffcc00; font-size: 24px; font-weight: bold; z-index: 2; }
+/* 📝 ÖZELLİKLER */
+#ozellikler-display {
+  position: absolute;
+  bottom: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 20px;
+  background: rgba(0,0,0,0.6);
+  padding: 10px 20px;
+  border-radius: 10px;
+  z-index: 2;
+}
 
-#play-btn { position: absolute; bottom: 5%; left: 50%; transform: translateX(-50%); padding: 15px 25px; font-size: 18px; cursor: not-allowed; border-radius: 10px; background: #ffcc00; border: none; box-shadow: 0 4px 6px rgba(0,0,0,0.3); z-index: 3; }
+/* 🔢 SAYILAR */
+#sayi-display {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ffcc00;
+  font-size: 24px;
+  font-weight: bold;
+  z-index: 2;
+}
 
-#test-buttons { position: absolute; top: 5%; left: 50%; transform: translateX(-50%); z-index: 5; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 10px; display: grid; grid-template-columns: repeat(4, auto); gap: 5px; }
+/* 🎯 BUTON */
+button {
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  border: none;
+  background: #ffcc00;
+  margin: 3px;
+  z-index: 3;
+}
 
-#test-buttons button { padding: 8px 12px; font-size: 14px; cursor: pointer; border-radius: 6px; background: #ffcc00; border: none; box-shadow: 0 2px 4px rgba(0,0,0,0.3); }
-
-.hidden { display: none; }
+/* 🔹 TEST BUTONLARI KONTEYNER */
+#test-buttons {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  z-index: 5;
+  background: rgba(0,0,0,0.5);
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.hidden {
+  display: none;
+}
