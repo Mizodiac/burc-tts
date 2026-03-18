@@ -122,6 +122,7 @@ function startListening() {
   recognition.onerror = function() {
     btn.innerText = "Burcunu Dinle ve Göster!";
     alert("Ses hatası");
+    
   };
 }
 
