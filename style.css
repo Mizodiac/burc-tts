@@ -1,124 +1,80 @@
-/* 🌍 GENEL AYAR */
 body, html {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
-  font-family: sans-serif;
+  background: black;
   overflow: hidden;
-  background: #000; /* siyah boşluklar için */
+  font-family: sans-serif;
 }
 
-/* 🎬 ANA KONTEYNER */
-#zodiac-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-/* 🖼️ ARKA PLAN (TAM GÖRÜNSÜN) */
+/* ARKA PLAN TAM GÖRÜNSÜN */
 #zodiac-bg {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;   /* 🔥 tamamını gösterir */
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   z-index: 0;
-  background: black;
+  pointer-events: none;
 }
 
-/* ✨ ORTA ALAN */
-.center-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  z-index: 2;
-}
-
-/* 🧿 BURÇ SİMGE */
+/* BURÇ */
 #burc-simge {
   position: absolute;
-  top: 20%;
+  top: 10%;
   left: 50%;
   transform: translateX(-50%);
-  width: 150px;
+  width: 120px;
   z-index: 2;
-  display: none;
 }
 
-/* 🪐 GEZEGEN VIDEO */
+/* VIDEO */
 #gezegen-video {
   position: absolute;
-  top: 45%;
-  left: 25%;
+  top: 40%;
+  left: 20%;
   width: 120px;
   z-index: 2;
-  display: none;
 }
 
-/* 🌿 ELEMENT */
+/* ELEMENT */
 #element-icon {
   position: absolute;
-  top: 45%;
-  right: 25%;
+  top: 40%;
+  right: 20%;
   width: 120px;
   z-index: 2;
-  display: none;
 }
 
-/* 📝 ÖZELLİKLER */
-#ozellikler-display {
+/* YAZI */
+#yazi {
   position: absolute;
-  bottom: 25%;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 20%;
+  width: 100%;
+  text-align: center;
   color: white;
   font-size: 20px;
-  background: rgba(0,0,0,0.6);
-  padding: 10px 20px;
-  border-radius: 10px;
   z-index: 2;
-  display: none;
 }
 
-/* 🔢 SAYILAR */
-#sayi-display {
+/* BUTONLAR */
+#buttons {
   position: absolute;
-  bottom: 15%;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #ffcc00;
-  font-size: 24px;
-  font-weight: bold;
-  z-index: 2;
-  display: none;
-}
-
-/* 🎯 BUTON */
-button {
-  padding: 10px;
-  font-size: 14px;
-  cursor: pointer;
-  border-radius: 8px;
-  background: #ffcc00;
-  border: none;
-}
-
-/* 🎤 ANA BUTON */
-#play-btn {
-  position: absolute;
-  bottom: 5%;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 15px 25px;
-  font-size: 18px;
+  bottom: 10px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
   z-index: 3;
 }
 
-/* 👻 GİZLEME */
-.hidden {
-  display: none;
+button {
+  padding: 8px 12px;
+  background: gold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
 }
