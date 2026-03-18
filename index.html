@@ -1,17 +1,38 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <title>Sesli Burç Sistemi</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mizodiac Show</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="background">
-    <img src="zodiac-background.jpg" alt="Zodiac" class="bg-image">
-    <div class="center-content">
-      <button id="startBtn">Butona Bas – Burcunu Söyle – Özelliklerini Dinle 😊</button>
-      <div id="burc-container"></div>
-    </div>
+  <div id="zodiac-container">
+    <img src="zodiac-background.jpg" alt="Zodiac Background" id="zodiac-bg">
+
+    <img id="burc-simge" class="hidden">
+    <img id="gezegen-gif" class="hidden">
+    <img id="element-icon" class="hidden">
+
+    <div id="ozellikler-display" class="hidden"></div>
+    <div id="sayi-display" class="hidden"></div>
+
+    <select id="burc-select">
+      <option value="koc">Koç</option>
+      <option value="boga">Boğa</option>
+      <option value="ikizler">İkizler</option>
+      <option value="yengec">Yengeç</option>
+      <option value="aslan">Aslan</option>
+      <option value="basak">Başak</option>
+      <option value="terazi">Terazi</option>
+      <option value="akrep">Akrep</option>
+      <option value="yay">Yay</option>
+      <option value="oglak">Oğlak</option>
+      <option value="kova">Kova</option>
+      <option value="balik">Balık</option>
+    </select>
+
+    <button id="play-btn">Burcunu Dinle ve Göster!</button>
   </div>
 
   <script src="script.js"></script>
