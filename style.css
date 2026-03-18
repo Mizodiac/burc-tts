@@ -27,6 +27,25 @@ body, html {
   z-index: 0;
 }
 
+/* 🔹 TEST BUTONLARI */
+#test-buttons {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+#test-buttons button {
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+  background: #ffcc00;
+}
+
 /* ✨ ORTA ALAN */
 .center-content {
   position: absolute;
@@ -40,19 +59,20 @@ body, html {
 /* 🧿 BURÇ SİMGE */
 #burc-simge {
   position: absolute;
-  top: 20%;
+  top: 30%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%) scale(1);
   width: 150px;
   z-index: 2;
+  transition: transform 1s ease;
 }
 
 /* 🪐 GEZEGEN VIDEO */
 #gezegen-video {
   position: absolute;
-  top: 45%;
-  left: 25%;
-  width: 120px;
+  top: 30%;
+  right: 10%;
+  width: 200px;
   z-index: 2;
   display: none;
 }
@@ -60,62 +80,56 @@ body, html {
 /* 🌿 ELEMENT */
 #element-icon {
   position: absolute;
-  top: 45%;
-  right: 25%;
+  top: 30%;
+  right: 10%;
   width: 120px;
   z-index: 2;
+  display: none;
 }
 
 /* 📝 ÖZELLİKLER */
 #ozellikler-display {
   position: absolute;
-  bottom: 25%;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 30%;
+  left: 5%;
+  width: 200px;
   color: white;
-  font-size: 20px;
-  background: rgba(0,0,0,0.6);
-  padding: 10px 20px;
-  border-radius: 10px;
-  z-index: 2;
+  font-size: 18px;
+  display: none;
+  flex-direction: column;
+  gap: 5px;
 }
 
 /* 🔢 SAYILAR */
 #sayi-display {
   position: absolute;
-  bottom: 15%;
+  top: 30%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) scale(1);
   color: #ffcc00;
   font-size: 24px;
   font-weight: bold;
-  z-index: 2;
+  display: none;
+  transition: transform 1s ease;
 }
 
 /* 🎯 BUTON */
-button {
-  padding: 10px 15px;
-  font-size: 16px;
+button#play-btn {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 15px 25px;
+  font-size: 18px;
   cursor: pointer;
-  border-radius: 8px;
-  border: none;
+  border-radius: 10px;
   background: #ffcc00;
-  margin: 3px;
+  border: none;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
   z-index: 3;
 }
 
-/* 🔹 TEST BUTONLARI KONTEYNER */
-#test-buttons {
-  position: absolute;
-  top: 5%;
-  left: 5%;
-  z-index: 5;
-  background: rgba(0,0,0,0.5);
-  padding: 10px;
-  border-radius: 10px;
-  display: flex;
-  flex-wrap: wrap;
-}
+/* 👻 GİZLEME */
 .hidden {
   display: none;
 }
