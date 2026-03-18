@@ -5,110 +5,190 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mizodiac Show</title>
 <style>
-/* 🌍 GENEL */
-body, html { margin:0; padding:0; width:100%; height:100%; font-family:sans-serif; overflow:hidden; background:#000; }
-#zodiac-container { position:relative; width:100%; height:100%; }
-#zodiac-bg { width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0; z-index:0; }
-
-/* 🧿 BURÇ PNG */
-#burc-simge { position:absolute; top:30%; left:50%; transform:translate(-50%,-50%); width:150px; z-index:3; transition: transform 0.8s ease; }
-
-/* 🪐 GEZEGEN VIDEO */
-#gezegen-video { position:absolute; top:20%; right:10%; width:220px; z-index:2; display:none; }
-
-/* 🌿 ELEMENT */
-#element-icon { position:absolute; top:20%; right:10%; width:150px; z-index:2; display:none; }
-
-/* 📝 ÖZELLİKLER */
-#ozellikler-display { position:absolute; top:20%; left:10%; color:white; font-size:18px; z-index:3; }
-.feature-item { opacity:0; transform:translateY(-20px); transition:opacity 0.5s ease, transform 0.5s ease; margin-bottom:10px; }
-.feature-item.show { opacity:1; transform:translateY(0); }
-
-/* 🔢 SAYILAR */
-#sayi-display { position:absolute; bottom:15%; left:50%; transform:translateX(-50%); color:#ffcc00; font-size:24px; font-weight:bold; z-index:3; }
-
-/* 🔘 BURÇ BUTONLARI */
-#burc-buttons { position:absolute; bottom:5%; left:50%; transform:translateX(-50%); display:flex; flex-wrap:wrap; justify-content:center; gap:5px; z-index:4; }
-#burc-buttons button { padding:10px 12px; font-size:16px; border-radius:6px; background:#ffcc00; border:none; cursor:pointer; }
+/* ====== CSS ====== */
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: sans-serif;
+  overflow: hidden;
+  background: #000;
+}
+#zodiac-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+#zodiac-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+.center-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 2;
+}
+.burc-btn {
+  padding: 10px 15px;
+  font-size: 16px;
+  margin: 3px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+  background: #ffcc00;
+  z-index: 5;
+}
+#burc-simge, #element-icon {
+  position: absolute;
+  width: 120px;
+  z-index: 3;
+  display: none;
+}
+#burc-simge { top: 40%; left: 50%; transform: translate(-50%, -50%); }
+#element-icon { top: 40%; right: 20%; transform: translateY(-50%); }
+#gezegen-video {
+  position: absolute;
+  width: 120px;
+  top: 40%;
+  right: 20%;
+  z-index: 3;
+  display: none;
+}
+#ozellikler-display {
+  position: absolute;
+  top: 20%;
+  left: 5%;
+  color: white;
+  font-size: 18px;
+  display: none;
+}
+#sayi-display {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ffcc00;
+  font-size: 24px;
+  font-weight: bold;
+  display: none;
+}
+#play-btn {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 15px 25px;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 10px;
+  background: #ffcc00;
+  border: none;
+  z-index: 5;
+}
 </style>
 </head>
 <body>
+
 <div id="zodiac-container">
   <img src="zodiac-background.jpg" id="zodiac-bg">
-  <img id="burc-simge" class="hidden">
-  <video id="gezegen-video" class="hidden" muted></video>
-  <img id="element-icon" class="hidden">
-  <div id="ozellikler-display" class="hidden"></div>
-  <div id="sayi-display" class="hidden"></div>
+  <img id="burc-simge">
+  <img id="element-icon">
+  <video id="gezegen-video" muted></video>
+  <div id="ozellikler-display"></div>
+  <div id="sayi-display"></div>
 
-  <div id="burc-buttons">
-    <button onclick='runShow("koc")'>Koç</button>
-    <button onclick='runShow("boga")'>Boğa</button>
-    <button onclick='runShow("ikizler")'>İkizler</button>
-    <button onclick='runShow("yengec")'>Yengeç</button>
-    <button onclick='runShow("aslan")'>Aslan</button>
-    <button onclick='runShow("basak")'>Başak</button>
-    <button onclick='runShow("terazi")'>Terazi</button>
-    <button onclick='runShow("akrep")'>Akrep</button>
-    <button onclick='runShow("yay")'>Yay</button>
-    <button onclick='runShow("oglak")'>Oğlak</button>
-    <button onclick='runShow("kova")'>Kova</button>
-    <button onclick='runShow("balik")'>Balık</button>
+  <!-- Burç butonları -->
+  <div style="position:absolute; top:5%; left:5%; z-index:5;">
+    <button class="burc-btn" data-burc="koc">Koç</button>
+    <button class="burc-btn" data-burc="boga">Boğa</button>
+    <button class="burc-btn" data-burc="ikizler">İkizler</button>
+    <button class="burc-btn" data-burc="yengec">Yengeç</button>
+    <button class="burc-btn" data-burc="aslan">Aslan</button>
+    <button class="burc-btn" data-burc="basak">Başak</button>
+    <button class="burc-btn" data-burc="terazi">Terazi</button>
+    <button class="burc-btn" data-burc="akrep">Akrep</button>
+    <button class="burc-btn" data-burc="yay">Yay</button>
+    <button class="burc-btn" data-burc="oglak">Oğlak</button>
+    <button class="burc-btn" data-burc="kova">Kova</button>
+    <button class="burc-btn" data-burc="balik">Balık</button>
   </div>
+
+  <button id="play-btn">Burcunu Dinle ve Göster!</button>
 </div>
 
 <script>
-const burcSimge=document.getElementById("burc-simge");
-const elementIcon=document.getElementById("element-icon");
-const ozelliklerDisplay=document.getElementById("ozellikler-display");
-const sayiDisplay=document.getElementById("sayi-display");
-const gezegenVideoEl=document.getElementById("gezegen-video");
+// ====== JS ======
+const burcSimge = document.getElementById("burc-simge");
+const elementIcon = document.getElementById("element-icon");
+const gezegenVideo = document.getElementById("gezegen-video");
+const ozelliklerDisplay = document.getElementById("ozellikler-display");
+const sayiDisplay = document.getElementById("sayi-display");
 
 const data = {
-  koc:{tanitim:"mp3/koc_tanitim.mp3",ozellikler:"mp3/koc_ozellikler.mp3",gezegenVideo:"icons/mars.mp4",element:"mp3/koc_element.mp3",elementIcon:"icons/ates.png",sayilar:"1, 8, 17",features:["Cesur","Enerjik","Lider"]},
-  boga:{tanitim:"mp3/boga_tanitim.mp3",ozellikler:"mp3/boga_ozellikler.mp3",gezegenVideo:"icons/venus.mp4",element:"mp3/boga_element.mp3",elementIcon:"icons/toprak.png",sayilar:"2, 6, 9",features:["Sabırlı","Kararlı","Sadık"]},
-  ikizler:{tanitim:"mp3/ikizler_tanitim.mp3",ozellikler:"mp3/ikizler_ozellikler.mp3",gezegenVideo:"icons/merkur.mp4",element:"mp3/ikizler_element.mp3",elementIcon:"icons/hava.png",sayilar:"3, 7, 12",features:["Zeki","Hızlı","Meraklı"]},
-  yengec:{tanitim:"mp3/yengec_tanitim.mp3",ozellikler:"mp3/yengec_ozellikler.mp3",gezegenVideo:"icons/moon.mp4",element:"mp3/yengec_element.mp3",elementIcon:"icons/su.png",sayilar:"2, 7, 11",features:["Duygusal","Sevgi dolu","Koruyucu"]},
-  aslan:{tanitim:"mp3/aslan_tanitim.mp3",ozellikler:"mp3/aslan_ozellikler.mp3",gezegenVideo:"icons/sun.mp4",element:"mp3/aslan_element.mp3",elementIcon:"icons/ates.png",sayilar:"1, 5, 9",features:["Cesur","Gururlu","Yaratıcı"]},
-  basak:{tanitim:"mp3/basak_tanitim.mp3",ozellikler:"mp3/basak_ozellikler.mp3",gezegenVideo:"icons/merkur(1).mp4",element:"mp3/basak_element.mp3",elementIcon:"icons/toprak.png",sayilar:"5, 14, 23",features:["Titiz","Analitik","Dikkatli"]},
-  terazi:{tanitim:"mp3/terazi_tanitim.mp3",ozellikler:"mp3/terazi_ozellikler.mp3",gezegenVideo:"icons/venus(1).mp4",element:"mp3/terazi_element.mp3",elementIcon:"icons/hava.png",sayilar:"6, 15, 24",features:["Adil","Sosyal","Estetik"]},
-  akrep:{tanitim:"mp3/akrep_tanitim.mp3",ozellikler:"mp3/akrep_ozellikler.mp3",gezegenVideo:"icons/pluton.mp4",element:"mp3/akrep_element.mp3",elementIcon:"icons/su.png",sayilar:"8, 11, 18",features:["Tutkulu","Kararlı","Gizemli"]},
-  yay:{tanitim:"mp3/yay_tanitim.mp3",ozellikler:"mp3/yay_ozellikler.mp3",gezegenVideo:"icons/jupiter.mp4",element:"mp3/yay_element.mp3",elementIcon:"icons/ates.png",sayilar:"3, 7, 9",features:["Özgür","Neşeli","Maceracı"]},
-  oglak:{tanitim:"mp3/oglak_tanitim.mp3",ozellikler:"mp3/oglak_ozellikler.mp3",gezegenVideo:"icons/saturn.mp4",element:"mp3/oglak_element.mp3",elementIcon:"icons/toprak.png",sayilar:"4, 8, 13",features:["Disiplinli","Sabırlı","Sorumlu"]},
-  kova:{tanitim:"mp3/kova_tanitim.mp3",ozellikler:"mp3/kova_ozellikler.mp3",gezegenVideo:"icons/uranus.mp4",element:"mp3/kova_element.mp3",elementIcon:"icons/hava.png",sayilar:"4, 7, 11",features:["Özgün","Zeki","İnsansever"]},
-  balik:{tanitim:"mp3/balik_tanitim.mp3",ozellikler:"mp3/balik_ozellikler.mp3",gezegenVideo:"icons/neptun.mp4",element:"mp3/balik_element.mp3",elementIcon:"icons/su.png",sayilar:"3, 7, 12",features:["Sevgi dolu","Duygusal","Hayalperest"]}
+  koc:{tanitim:"mp3/koc.mp3", ozellikler:["Cesur","Atılgan","Enerjik"], element:"mp3/koc_element.mp3", elementIcon:"icons/ates.png", sayilar:"1, 8, 17", gezegenVideo:"mp4/mars.mp4", simge:"icons/koc.png"},
+  boga:{tanitim:"mp3/boga.mp3", ozellikler:["Sabırlı","Sadık","Pratik"], element:"mp3/boga_element.mp3", elementIcon:"icons/toprak.png", sayilar:"2, 6, 9", gezegenVideo:"mp4/venus.mp4", simge:"icons/boga.png"},
+  ikizler:{tanitim:"mp3/ikizler.mp3", ozellikler:["Zeki","Meraklı","Sosyal"], element:"mp3/ikizler_element.mp3", elementIcon:"icons/hava.png", sayilar:"3, 7, 12", gezegenVideo:"mp4/merkur.mp4", simge:"icons/ikizler.png"},
+  yengec:{tanitim:"mp3/yengec.mp3", ozellikler:["Duygusal","Şefkatli","Koruyucu"], element:"mp3/yengec_element.mp3", elementIcon:"icons/su.png", sayilar:"2, 7, 11", gezegenVideo:"mp4/moon.mp4", simge:"icons/yengec.png"},
+  aslan:{tanitim:"mp3/aslan.mp3", ozellikler:["Gururlu","Lider","Cömert"], element:"mp3/aslan_element.mp3", elementIcon:"icons/ates.png", sayilar:"1, 5, 9", gezegenVideo:"mp4/sun.mp4", simge:"icons/aslan.png"},
+  basak:{tanitim:"mp3/basak.mp3", ozellikler:["Titiz","Analitik","Çalışkan"], element:"mp3/basak_element.mp3", elementIcon:"icons/toprak.png", sayilar:"5, 14, 23", gezegenVideo:"mp4/merkur(1).mp4", simge:"icons/basak.png"},
+  terazi:{tanitim:"mp3/terazi.mp3", ozellikler:["Adil","Diplomatik","Nazik"], element:"mp3/terazi_element.mp3", elementIcon:"icons/hava.png", sayilar:"6, 15, 24", gezegenVideo:"mp4/venus(1).mp4", simge:"icons/terazi.png"},
+  akrep:{tanitim:"mp3/akrep.mp3", ozellikler:["Tutkulu","Gizemli","Kararlı"], element:"mp3/akrep_element.mp3", elementIcon:"icons/su.png", sayilar:"8, 11, 18", gezegenVideo:"mp4/pluton.mp4", simge:"icons/akrep.png"},
+  yay:{tanitim:"mp3/yay.mp3", ozellikler:["Özgür","Neşeli","Maceracı"], element:"mp3/yay_element.mp3", elementIcon:"icons/ates.png", sayilar:"3, 7, 9", gezegenVideo:"mp4/jupiter.mp4", simge:"icons/yay.png"},
+  oglak:{tanitim:"mp3/oglak.mp3", ozellikler:["Disiplinli","Sabırlı","Sorumlu"], element:"mp3/oglak_element.mp3", elementIcon:"icons/toprak.png", sayilar:"4, 8, 13", gezegenVideo:"mp4/saturn.mp4", simge:"icons/oglak.png"},
+  kova:{tanitim:"mp3/kova.mp3", ozellikler:["Yaratıcı","Bağımsız","Hafiflik"], element:"mp3/kova_element.mp3", elementIcon:"icons/hava.png", sayilar:"4, 7, 11", gezegenVideo:"mp4/uranus.mp4", simge:"icons/kova.png"},
+  balik:{tanitim:"mp3/balik.mp3", ozellikler:["Duygusal","Hayalperest","Sezgisel"], element:"mp3/balik_element.mp3", elementIcon:"icons/su.png", sayilar:"3, 7, 12", gezegenVideo:"mp4/neptun.mp4", simge:"icons/balik.png"}
 };
 
-function hideAll(){ [burcSimge, elementIcon, gezegenVideoEl, ozelliklerDisplay, sayiDisplay].forEach(el=>el.style.display="none"); }
-function show(el, src=null){ if(src){ if(el.tagName==="VIDEO"){ el.src=src; el.currentTime=0; el.play(); } else el.src=src; } el.style.display="block"; }
-function playAudio(src){ return new Promise(resolve=>{ const audio=new Audio(src); audio.play(); audio.onended=resolve; }); }
-async function showFeatures(features,audioSrc){ ozelliklerDisplay.innerHTML=""; show(ozelliklerDisplay); const audio=new Audio(audioSrc); audio.play(); for(let i=0;i<features.length;i++){ const div=document.createElement("div"); div.className="feature-item"; div.innerText=features[i]; ozelliklerDisplay.appendChild(div); await new Promise(r=>setTimeout(r,500)); div.classList.add("show"); } return new Promise(resolve=>{ audio.onended=resolve; }); }
+// Utility
+function hideAll() {
+  [burcSimge, elementIcon, gezegenVideo, ozelliklerDisplay, sayiDisplay].forEach(el=>{
+    el.style.display="none";
+    if(el.tagName=="VIDEO"){el.pause(); el.currentTime=0;}
+  });
+}
+function playAudio(src){return new Promise(r=>{const a=new Audio(src);a.play();a.onended=r;});}
+function show(el){el.style.display="block";}
 
+// Run show
 async function runShow(burc){
-  const b=data[burc]; if(!b){ alert("Burç bulunamadı"); return; }
+  const b=data[burc];
+  if(!b) {alert("Burç bulunamadı"); return;}
   hideAll();
-  document.body.style.background="#000";
 
   // Tanıtım
   await playAudio(b.tanitim);
-  burcSimge.src=b.simge; burcSimge.style.transform="translate(-50%,-50%) scale(1.5)"; show(burcSimge);
-  await new Promise(r=>setTimeout(r,800));
+  burcSimge.src=b.simge; show(burcSimge);
 
-  // Özellikler + Gezegen
-  show(gezegenVideoEl,b.gezegenVideo); gezegenVideoEl.play();
-  await showFeatures(b.features,b.ozellikler);
-  gezegenVideoEl.pause(); hideAll();
+  // Özellikler + gezegen
+  document.body.style.background="#000";
+  await playAudio(b.element); // Eğer istersen burç özellik mp3 çalabiliriz
+  ozelliklerDisplay.innerHTML=b.ozellikler.map(o=>"<div>"+o+"</div>").join("");
+  show(ozelliklerDisplay);
+  gezegenVideo.src=b.gezegenVideo; show(gezegenVideo); gezegenVideo.play();
 
   // Element
-  elementIcon.src=b.elementIcon; show(elementIcon);
-  await playAudio(b.element);
-  hideAll();
+  document.body.style.background="#000";
+  await playAudio(b.element); show(elementIcon); elementIcon.src=b.elementIcon;
 
   // Sayılar
-  sayiDisplay.innerText=b.sayilar; show(sayiDisplay);
-  await playAudio(b.sayi);
-  hideAll();
+  document.body.style.background="#000";
+  await playAudio(b.tanitim); sayiDisplay.innerText=b.sayilar; show(sayiDisplay);
 }
+
+// Button events
+document.querySelectorAll(".burc-btn").forEach(btn=>{
+  btn.onclick=()=>{runShow(btn.dataset.burc);}
+});
 </script>
+
 </body>
 </html>
