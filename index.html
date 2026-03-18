@@ -4,34 +4,49 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mizodiac Show</title>
-<link rel="stylesheet" href="style.css">
+<style>
+/* 🌍 GENEL AYAR */
+body, html {
+  margin: 0; padding: 0;
+  width: 100%; height: 100%;
+  font-family: sans-serif; overflow: hidden;
+  background: #000;
+}
+#zodiac-container { position: relative; width: 100%; height: 100%; }
+/* ARKA PLAN */
+#zodiac-bg { width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0; z-index:0; }
+/* TEST BUTONLARI */
+#test-buttons { position:absolute; top:5%; left:5%; z-index:5; display:flex; flex-wrap:wrap; gap:5px; }
+#test-buttons button { padding:5px 10px; font-size:14px; cursor:pointer; border-radius:5px; border:none; background:#ffcc00; }
+/* BURÇ */
+#burc-simge { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) scale(1); width:150px; z-index:2; transition: transform 1s ease; display:none; }
+/* GEZEGEN */
+#gezegen-video { position:absolute; top:30%; right:10%; width:200px; z-index:2; display:none; }
+/* ELEMENT */
+#element-icon { position:absolute; top:30%; right:10%; width:120px; z-index:2; display:none; }
+/* ÖZELLİKLER */
+#ozellikler-display { position:absolute; top:30%; left:5%; width:200px; color:white; font-size:18px; display:none; flex-direction:column; gap:5px; }
+/* SAYILAR */
+#sayi-display { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) scale(1); color:#ffcc00; font-size:24px; font-weight:bold; display:none; transition:transform 1s ease; }
+/* ANA BUTON */
+button#play-btn { position:absolute; bottom:5%; left:50%; transform:translateX(-50%); padding:15px 25px; font-size:18px; cursor:pointer; border-radius:10px; background:#ffcc00; border:none; box-shadow:0 4px 6px rgba(0,0,0,0.3); z-index:3; }
+/* GİZLEME */
+.hidden { display:none; }
+</style>
 </head>
 <body>
-
 <div id="zodiac-container">
 
-  <!-- 🖼️ ARKA PLAN -->
   <img src="zodiac-background.jpg" id="zodiac-bg">
 
-  <!-- 🧿 BURÇ -->
   <img id="burc-simge" class="hidden">
-
-  <!-- 🪐 GEZEGEN VIDEO -->
   <video id="gezegen-video" class="hidden" muted></video>
-
-  <!-- 🌿 ELEMENT -->
   <img id="element-icon" class="hidden">
-
-  <!-- 📝 ÖZELLİKLER -->
   <div id="ozellikler-display" class="hidden"></div>
-
-  <!-- 🔢 SAYILAR -->
   <div id="sayi-display" class="hidden"></div>
 
-  <!-- 🎤 BUTON -->
   <button id="play-btn">Burcunu Dinle ve Göster!</button>
 
-  <!-- 🔹 BURÇ TEST BUTONLARI -->
   <div id="test-buttons">
     <button onclick='runShow("koc")'>Koç</button>
     <button onclick='runShow("boga")'>Boğa</button>
@@ -46,9 +61,63 @@
     <button onclick='runShow("kova")'>Kova</button>
     <button onclick='runShow("balik")'>Balık</button>
   </div>
-
 </div>
 
-<script src="script.js"></script>
+<script>
+// BURÇ VERİLERİ
+const data = {
+  koc:{tanitim:"mp3/koc_tanitim.mp3",ozellikler:["Cesur","Atılgan"],gezegenVideo:"icons/mars.mp4",element:"mp3/koc_element.mp3",elementIcon:"icons/ates.png",sayi:"mp3/koc_sayi.mp3",sayilar:"1,8,17",simge:"icons/koc.png"},
+  boga:{tanitim:"mp3/boga_tanitim.mp3",ozellikler:["Sabırlı","Kararlı"],gezegenVideo:"icons/venus.mp4",element:"mp3/boga_element.mp3",elementIcon:"icons/toprak.png",sayi:"mp3/boga_sayi.mp3",sayilar:"2,6,9",simge:"icons/boga.png"},
+  ikizler:{tanitim:"mp3/ikizler_tanitim.mp3",ozellikler:["Meraklı","Çok yönlü"],gezegenVideo:"icons/merkur.mp4",element:"mp3/ikizler_element.mp3",elementIcon:"icons/hava.png",sayi:"mp3/ikizler_sayi.mp3",sayilar:"3,7,12",simge:"icons/ikizler.png"},
+  yengec:{tanitim:"mp3/yengec_tanitim.mp3",ozellikler:["Duygusal","Koruyucu"],gezegenVideo:"icons/moon.mp4",element:"mp3/yengec_element.mp3",elementIcon:"icons/su.png",sayi:"mp3/yengec_sayi.mp3",sayilar:"2,7,11",simge:"icons/yengec.png"},
+  aslan:{tanitim:"mp3/aslan_tanitim.mp3",ozellikler:["Gururlu","Yaratıcı"],gezegenVideo:"icons/sun.mp4",element:"mp3/aslan_element.mp3",elementIcon:"icons/ates.png",sayi:"mp3/aslan_sayi.mp3",sayilar:"1,5,9",simge:"icons/aslan.png"},
+  basak:{tanitim:"mp3/basak_tanitim.mp3",ozellikler:["Titiz","Analitik"],gezegenVideo:"icons/merkur(1).mp4",element:"mp3/basak_element.mp3",elementIcon:"icons/toprak.png",sayi:"mp3/basak_sayi.mp3",sayilar:"5,14,23",simge:"icons/basak.png"},
+  terazi:{tanitim:"mp3/terazi_tanitim.mp3",ozellikler:["Adil","Dengeli"],gezegenVideo:"icons/venus(1).mp4",element:"mp3/terazi_element.mp3",elementIcon:"icons/hava.png",sayi:"mp3/terazi_sayi.mp3",sayilar:"6,15,24",simge:"icons/terazi.png"},
+  akrep:{tanitim:"mp3/akrep_tanitim.mp3",ozellikler:["Tutkulu","Gizemli"],gezegenVideo:"icons/pluton.mp4",element:"mp3/akrep_element.mp3",elementIcon:"icons/su.png",sayi:"mp3/akrep_sayi.mp3",sayilar:"8,11,18",simge:"icons/akrep.png"},
+  yay:{tanitim:"mp3/yay_tanitim.mp3",ozellikler:["Macera","Özgür"],gezegenVideo:"icons/jupiter.mp4",element:"mp3/yay_element.mp3",elementIcon:"icons/ates.png",sayi:"mp3/yay_sayi.mp3",sayilar:"3,7,9",simge:"icons/yay.png"},
+  oglak:{tanitim:"mp3/oglak_tanitim.mp3",ozellikler:["Disiplinli","Sorumluluk"],gezegenVideo:"icons/saturn.mp4",element:"mp3/oglak_element.mp3",elementIcon:"icons/toprak.png",sayi:"mp3/oglak_sayi.mp3",sayilar:"4,8,13",simge:"icons/oglak.png"},
+  kova:{tanitim:"mp3/kova_tanitim.mp3",ozellikler:["İcatçı","Özgür"],gezegenVideo:"icons/uranus.mp4",element:"mp3/kova_element.mp3",elementIcon:"icons/hava.png",sayi:"mp3/kova_sayi.mp3",sayilar:"4,7,11",simge:"icons/kova.png"},
+  balik:{tanitim:"mp3/balik_tanitim.mp3",ozellikler:["Sezgisel","Duygusal"],gezegenVideo:"icons/neptun.mp4",element:"mp3/balik_element.mp3",elementIcon:"icons/su.png",sayi:"mp3/balik_sayi.mp3",sayilar:"3,7,12",simge:"icons/balik.png"}
+};
+
+// DOM
+const btn = document.getElementById("play-btn");
+const burcSimge = document.getElementById("burc-simge");
+const elementIcon = document.getElementById("element-icon");
+const ozelliklerDisplay = document.getElementById("ozellikler-display");
+const sayiDisplay = document.getElementById("sayi-display");
+const videoEl = document.getElementById("gezegen-video");
+
+// AUDIO
+function playAudio(src){ return new Promise(r=>{ const a=new Audio(src); a.play(); a.onended=r; }); }
+
+// SHOW
+async function runShow(burc){
+  const b = data[burc]; if(!b){alert("Burç bulunamadı"); return;}
+  // 1️⃣ Tanıtım
+  burcSimge.src=b.simge; burcSimge.style.display="block"; burcSimge.style.transform="translate(-50%,-50%) scale(1.5)";
+  await playAudio(b.tanitim);
+  // 2️⃣ Özellikler + gezegen
+  burcSimge.style.display="none"; document.body.style.background="#000";
+  ozelliklerDisplay.style.display="block"; videoEl.style.display="block"; videoEl.src=b.gezegenVideo; videoEl.play();
+  for(let o of b.ozellikler){
+    ozelliklerDisplay.innerText=o;
+    await new Promise(r=>setTimeout(r,800));
+  }
+  videoEl.pause(); videoEl.style.display="none"; ozelliklerDisplay.style.display="none";
+  // 3️⃣ Element
+  elementIcon.src=b.elementIcon; elementIcon.style.display="block";
+  await playAudio(b.element); elementIcon.style.display="none";
+  // 4️⃣ Sayılar
+  sayiDisplay.innerText=b.sayilar; sayiDisplay.style.display="block"; sayiDisplay.style.transform="translate(-50%,-50%) scale(1.5)";
+  await playAudio(b.sayi); sayiDisplay.style.display="none";
+  document.body.style.background="";
+}
+
+// TEST BUTONLARI
+document.querySelectorAll("#test-buttons button").forEach(btn=>{
+  btn.addEventListener("click",()=>{ runShow(btn.textContent.toLowerCase()); });
+});
+</script>
 </body>
 </html>
