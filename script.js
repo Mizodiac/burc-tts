@@ -1,44 +1,10 @@
-// 🔤 BURÇ ALGILAMA
-const burclar = {
-  "koc":"koc","koç":"koc",
-  "boga":"boga","boğa":"boga",
-  "ikizler":"ikizler",
-  "yengec":"yengec","yengeç":"yengec",
-  "aslan":"aslan",
-  "basak":"basak","başak":"basak",
-  "terazi":"terazi",
-  "akrep":"akrep",
-  "yay":"yay",
-  "oglak":"oglak","oğlak":"oglak",
-  "kova":"kova",
-  "balik":"balik","balık":"balik"
-};
-
-// 📦 VERİLER
-const data = {
-  koc:{tanitim:"mp3/koc_tanitim.mp3",ozellikler:["Özellik 1","Özellik 2"],gezegen:"mp3/koc_gezegen.mp3",element:"mp3/koc_element.mp3",sayi:"mp3/koc_sayi.mp3",simge:"icons/koc.png",gezegenVideo:"icons/mars.mp4",elementIcon:"icons/ates.png",sayilar:"1, 8, 17"},
-  boga:{tanitim:"mp3/boga_tanitim.mp3",ozellikler:["Özellik 1","Özellik 2"],gezegen:"mp3/boga_gezegen.mp3",element:"mp3/boga_element.mp3",sayi:"mp3/boga_sayi.mp3",simge:"icons/boga.png",gezegenVideo:"icons/venus.mp4",elementIcon:"icons/toprak.png",sayilar:"2, 6, 9"},
-  ikizler:{tanitim:"mp3/ikizler_tanitim.mp3",ozellikler:["Özellik 1","Özellik 2"],gezegen:"mp3/ikizler_gezegen.mp3",element:"mp3/ikizler_element.mp3",sayi:"mp3/ikizler_sayi.mp3",simge:"icons/ikizler.png",gezegenVideo:"icons/merkur.mp4",elementIcon:"icons/hava.png",sayilar:"3, 7, 12"},
-  yengec:{tanitim:"mp3/yengec_tanitim.mp3",ozellikler:["Özellik 1","Özellik 2"],gezegen:"mp3/yengec_gezegen.mp3",element:"mp3/yengec_element.mp3",sayi:"mp3/yengec_sayi.mp3",simge:"icons/yengec.png",gezegenVideo:"icons/moon.mp4",elementIcon:"icons/su.png",sayilar:"2, 7, 11"},
-  aslan:{tanitim:"mp3/aslan_tanitim.mp3",ozellikler:["Özellik 1","Özellik 2"],gezegen:"mp3/aslan_gezegen.mp3",element:"mp3/aslan_element.mp3",sayi:"mp3/aslan_sayi.mp3",simge:"icons/aslan.png",gezegenVideo:"icons/sun.mp4",elementIcon:"icons/ates.png",sayilar:"1, 5, 9"},
-  basak:{tanitim:"mp3/basak_tanitim.mp3",ozellikler:["Özellik 1","Özellik 2"],gezegen:"mp3/basak_gezegen.mp3",element:"mp3/basak_element.mp3",sayi:"mp3/basak_sayi.mp3",simge:"icons/basak.png",gezegenVideo:"icons/merkur(1).mp4",elementIcon:"icons/toprak.png",sayilar:"5, 14, 23"},
-  terazi:{tanitim:"mp3/terazi_tanitim.mp3",ozellikler:["Özellik 1","Özellik 2"],gezegen:"mp3/terazi_gezegen.mp3",element:"mp3/terazi_element.mp3",sayi:"mp3/terazi_sayi.mp3",simge:"icons/terazi.png",gezegenVideo:"icons/venus(1).mp4",elementIcon:"icons/hava.png",sayilar:"6, 15, 24"},
-  akrep:{tanitim:"mp3/akrep_tanitim.mp3",ozellikler:["Özellik 1","Özellik 2"],gezegen:"mp3/akrep_gezegen.mp3",element:"mp3/akrep_element.mp3",sayi:"mp3/akrep_sayi.mp3",simge:"icons/akrep.png",gezegenVideo:"icons/pluton.mp4",elementIcon:"icons/su.png",sayilar:"8, 11, 18"},
-  yay:{tanitim:"mp3/yay_tanitim.mp3",ozellikler:["Özellik 1","Özellik 2"],gezegen:"mp3/yay_gezegen.mp3",element:"mp3/yay_element.mp3",sayi:"mp3/yay_sayi.mp3",simge:"icons/yay.png",gezegenVideo:"icons/jupiter.mp4",elementIcon:"icons/ates.png",sayilar:"3, 7, 9"},
-  oglak:{tanitim:"mp3/oglak_tanitim.mp3",ozellikler:["Özellik 1","Özellik 2"],gezegen:"mp3/oglak_gezegen.mp3",element:"mp3/oglak_element.mp3",sayi:"mp3/oglak_sayi.mp3",simge:"icons/oglak.png",gezegenVideo:"icons/saturn.mp4",elementIcon:"icons/toprak.png",sayilar:"4, 8, 13"},
-  kova:{tanitim:"mp3/kova_tanitim.mp3",ozellikler:["Özellik 1","Özellik 2"],gezegen:"mp3/kova_gezegen.mp3",element:"mp3/kova_element.mp3",sayi:"mp3/kova_sayi.mp3",simge:"icons/kova.png",gezegenVideo:"icons/uranus.mp4",elementIcon:"icons/hava.png",sayilar:"4, 7, 11"},
-  balik:{tanitim:"mp3/balik_tanitim.mp3",ozellikler:["Özellik 1","Özellik 2"],gezegen:"mp3/balik_gezegen.mp3",element:"mp3/balik_element.mp3",sayi:"mp3/balik_sayi.mp3",simge:"icons/balik.png",gezegenVideo:"icons/neptun.mp4",elementIcon:"icons/su.png",sayilar:"3, 7, 12"}
-};
-
-// 🎯 DOM
-const btn = document.getElementById("play-btn");
 const burcSimge = document.getElementById("burc-simge");
 const elementIcon = document.getElementById("element-icon");
 const ozelliklerDisplay = document.getElementById("ozellikler-display");
 const sayiDisplay = document.getElementById("sayi-display");
 const videoEl = document.getElementById("gezegen-video");
 
-// 🔊 AUDIO
+// 🎵 Ses çalma
 function playAudio(src) {
   return new Promise(resolve => {
     const audio = new Audio(src);
@@ -47,99 +13,59 @@ function playAudio(src) {
   });
 }
 
-// 🎨 UI
-function show(el, src = null) {
-  if (src) {
-    if (el.tagName === "VIDEO") {
-      el.src = src;
-      el.currentTime = 0;
-      el.play();
-    } else {
-      el.src = src;
-    }
-  }
-  el.style.display = "block";
-}
+// Görünürlük
+function show(el) { el.style.display="block"; if(el===burcSimge||el===elementIcon){el.style.transform="translate(-50%,-50%) scale(1)";} if(el===ozelliklerDisplay||el===sayiDisplay){el.style.opacity=1;} }
+function hideAll() { [burcSimge,elementIcon,ozelliklerDisplay,sayiDisplay,videoEl].forEach(el=>{el.style.display="none"; el.style.opacity=0; el.style.transform="translate(-50%,-50%) scale(0)";}); }
 
-function hideAll() {
-  [burcSimge, elementIcon, videoEl, ozelliklerDisplay, sayiDisplay].forEach(el => el.style.display = "none");
-  videoEl.pause();
-}
+// 🔤 Burç verisi
+const data = {
+  koc:{tanitim:"mp3/koc.mp3",ozellikler:["Enerjik","Cesur","Atılgan"],gezegen:"mp3/koc_gezegen.mp3",element:"mp3/koc_element.mp3",sayi:"mp3/koc_sayi.mp3",simge:"icons/koc.png",elementIcon:"icons/ates.png",video:"icons/mars.mp4"},
+  boga:{tanitim:"mp3/boga.mp3",ozellikler:["Sabırlı","Kararlı","Huzurlu"],gezegen:"mp3/boga_gezegen.mp3",element:"mp3/boga_element.mp3",sayi:"mp3/boga_sayi.mp3",simge:"icons/boga.png",elementIcon:"icons/toprak.png",video:"icons/venus.mp4"},
+  ikizler:{tanitim:"mp3/ikizler.mp3",ozellikler:["Zeki","Neşeli","Meraklı"],gezegen:"mp3/ikizler_gezegen.mp3",element:"mp3/ikizler_element.mp3",sayi:"mp3/ikizler_sayi.mp3",simge:"icons/ikizler.png",elementIcon:"icons/hava.png",video:"icons/merkur.mp4"},
+  yengec:{tanitim:"mp3/yengec.mp3",ozellikler:["Duygusal","Şefkatli","Sevgi dolu"],gezegen:"mp3/yengec_gezegen.mp3",element:"mp3/yengec_element.mp3",sayi:"mp3/yengec_sayi.mp3",simge:"icons/yengec.png",elementIcon:"icons/su.png",video:"icons/moon.mp4"},
+  aslan:{tanitim:"mp3/aslan.mp3",ozellikler:["Güçlü","Özgüvenli","Lider"],gezegen:"mp3/aslan_gezegen.mp3",element:"mp3/aslan_element.mp3",sayi:"mp3/aslan_sayi.mp3",simge:"icons/aslan.png",elementIcon:"icons/ates.png",video:"icons/sun.mp4"},
+  basak:{tanitim:"mp3/basak.mp3",ozellikler:["Titiz","Çalışkan","Mantıklı"],gezegen:"mp3/basak_gezegen.mp3",element:"mp3/basak_element.mp3",sayi:"mp3/basak_sayi.mp3",simge:"icons/basak.png",elementIcon:"icons/toprak.png",video:"icons/merkur(1).mp4"},
+  terazi:{tanitim:"mp3/terazi.mp3",ozellikler:["Dengeli","Adaletli","İletişimci"],gezegen:"mp3/terazi_gezegen.mp3",element:"mp3/terazi_element.mp3",sayi:"mp3/terazi_sayi.mp3",simge:"icons/terazi.png",elementIcon:"icons/hava.png",video:"icons/venus(1).mp4"},
+  akrep:{tanitim:"mp3/akrep.mp3",ozellikler:["Tutkulu","Gizemli","Kararlı"],gezegen:"mp3/akrep_gezegen.mp3",element:"mp3/akrep_element.mp3",sayi:"mp3/akrep_sayi.mp3",simge:"icons/akrep.png",elementIcon:"icons/su.png",video:"icons/pluton.mp4"},
+  yay:{tanitim:"mp3/yay.mp3",ozellikler:["Macera","Özgürlük","İyimser"],gezegen:"mp3/yay_gezegen.mp3",element:"mp3/yay_element.mp3",sayi:"mp3/yay_sayi.mp3",simge:"icons/yay.png",elementIcon:"icons/ates.png",video:"icons/jupiter.mp4"},
+  oglak:{tanitim:"mp3/oglak.mp3",ozellikler:["Sorumluluk","Disiplin","Planlı"],gezegen:"mp3/oglak_gezegen.mp3",element:"mp3/oglak_element.mp3",sayi:"mp3/oglak_sayi.mp3",simge:"icons/oglak.png",elementIcon:"icons/toprak.png",video:"icons/saturn.mp4"},
+  kova:{tanitim:"mp3/kova.mp3",ozellikler:["İnovatif","Bağımsız","Orijinal"],gezegen:"mp3/kova_gezegen.mp3",element:"mp3/kova_element.mp3",sayi:"mp3/kova_sayi.mp3",simge:"icons/kova.png",elementIcon:"icons/hava.png",video:"icons/uranus.mp4"},
+  balik:{tanitim:"mp3/balik.mp3",ozellikler:["Hayalperest","Duygusal","Sevgi dolu"],gezegen:"mp3/balik_gezegen.mp3",element:"mp3/balik_element.mp3",sayi:"mp3/balik_sayi.mp3",simge:"icons/balik.png",elementIcon:"icons/su.png",video:"icons/neptun.mp4"}
+};
 
-// 🚀 ANİMASYON AKIŞI
+// Gösteri akışı
 async function runShow(burc) {
-  try {
-    const b = data[burc];
-    if (!b) { alert("Burç bulunamadı"); return; }
+  const b = data[burc];
+  if(!b){alert("Burç bulunamadı"); return;}
+  hideAll();
 
-    hideAll();
+  // 1️⃣ Tanıtım
+  playAudio(b.tanitim);
+  show(burcSimge); burcSimge.src=b.simge;
+  await new Promise(r=>setTimeout(r,2000));
 
-    // 1️⃣ TANITIM
-    await playAudio(b.tanitim);
-    show(burcSimge, b.simge);
-    burcSimge.style.transform = "translate(-50%, -50%) scale(1.5)";
-    await new Promise(r => setTimeout(r, 1500));
+  // 2️⃣ Özellikler + Gezegen
+  document.body.style.background="#000";
+  let ozelliklerText=""; b.ozellikler.forEach(f=>{ozelliklerText+="• "+f+"\n";});
+  ozelliklerDisplay.innerText=ozelliklerText;
+  show(ozelliklerDisplay);
+  show(videoEl); videoEl.src=b.video; videoEl.play();
+  await playAudio(b.gezegen);
+  await new Promise(r=>videoEl.onended=r);
 
-    // 2️⃣ ÖZELLİKLER + GEZEGEN
-    hideAll();
-    document.body.style.background = "#000";
-    show(ozelliklerDisplay);
-    show(videoEl, b.gezegenVideo);
-    for (let o of b.ozellikler) {
-      ozelliklerDisplay.innerText = o;
-      await playAudio(b.gezegen); // sesle eş zamanlı
-      await new Promise(r => setTimeout(r, 500));
-    }
+  // 3️⃣ Element
+  document.body.style.background="#000";
+  show(elementIcon); elementIcon.src=b.elementIcon;
+  await playAudio(b.element);
 
-    // 3️⃣ ELEMENT
-    hideAll();
-    show(elementIcon, b.elementIcon);
-    await playAudio(b.element);
-
-    // 4️⃣ SAYILAR
-    hideAll();
-    sayiDisplay.innerText = b.sayilar;
-    show(sayiDisplay);
-    sayiDisplay.style.transform = "translateX(-50%) scale(1.5)";
-    await playAudio(b.sayi);
-
-    hideAll();
-    document.body.style.background = "";
-  } catch (err) {
-    console.error(err);
-    alert("HATA VAR: " + err.message);
-  }
+  // 4️⃣ Sayılar
+  document.body.style.background="#000";
+  sayiDisplay.innerText="Uğurlu Sayılar: "+b.sayi.split(",").join(", ");
+  show(sayiDisplay);
+  await playAudio(b.sayi);
 }
 
-// 🎤 SES TANIMA
-function startListening() {
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SpeechRecognition) { alert("Tarayıcı desteklemiyor"); return; }
-
-  const recognition = new SpeechRecognition();
-  recognition.lang = "tr-TR";
-  recognition.start();
-
-  btn.innerText = "Dinleniyor... 🎤";
-
-  recognition.onresult = function(e) {
-    const text = e.results[0][0].transcript.toLowerCase();
-    btn.innerText = "Burcunu Dinle ve Göster!";
-
-    for (let key in burclar) {
-      if (text.includes(key)) {
-        runShow(burclar[key]);
-        return;
-      }
-    }
-    alert("Burç anlaşılmadı 😅");
-  };
-
-  recognition.onerror = function() {
-    btn.innerText = "Burcunu Dinle ve Göster!";
-    alert("Ses hatası");
-  };
-}
-
-// 🎯 BUTON
-btn.addEventListener("click", startListening);
+// Buton listener
+document.querySelectorAll(".burc-btn").forEach(btn=>{
+  btn.addEventListener("click",()=>runShow(btn.dataset.burc));
+});
