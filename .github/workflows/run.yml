@@ -1,9 +1,6 @@
-name: Generate and Commit Zodiac MP3s
+name: Run Mizodiac Show
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
@@ -16,7 +13,7 @@ jobs:
         uses: actions/checkout@v3
 
       # 2️⃣ Python kur
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.11"
@@ -27,21 +24,17 @@ jobs:
           python -m pip install --upgrade pip
           pip install openai pathlib
 
-      # 4️⃣ API Key ayarla
-      - name: Set OpenAI API Key
+      # 4️⃣ Eksik MP3 üret (OPENAI API Key env ile)
+      - name: Generate missing MP3s
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: echo "API key is set"
-
-      # 5️⃣ Eksik MP3 üret
-      - name: Generate missing MP3 files
         run: python generate_missing_mp3.py
 
-      # 6️⃣ MP3’leri commit et
+      # 5️⃣ MP3’leri commit et (varsa)
       - name: Commit MP3 files
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
           git add mp3/
-          git commit -m "Add generated mp3 files" || echo "No changes"
+          git commit -m "Add generated mp3 files" || echo "No changes to commit"
           git push
