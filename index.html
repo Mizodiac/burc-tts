@@ -10,52 +10,35 @@
 
 <div id="zodiac-container">
 
-  <!-- 🖼️ ARKA PLAN -->
+  <!-- ARKA PLAN -->
   <img src="zodiac-background.jpg" id="zodiac-bg">
 
-  <!-- 🧿 BURÇ -->
-  <img id="burc-simge" class="hidden">
+  <!-- BURÇ -->
+  <img id="burc-simge">
 
-  <!-- 🌿 ELEMENT -->
-  <img id="element-icon" class="hidden">
+  <!-- ELEMENT -->
+  <img id="element-icon">
 
-  <!-- 📝 ÖZELLİK -->
-  <div id="ozellikler-display" class="hidden"></div>
+  <!-- VIDEO -->
+  <video id="gezegen-video" muted></video>
 
-  <!-- 🔢 SAYI -->
-  <div id="sayi-display" class="hidden"></div>
+  <!-- YAZI -->
+  <div id="yazi"></div>
 
-  <!-- 🎥 VIDEO -->
-  <video id="gezegen-video" class="hidden" muted></video>
-
-  <!-- 🔘 BURÇ BUTONLARI -->
-  <div id="test-buttons" style="
-    position:absolute;
-    top:10px;
-    left:10px;
-    right:10px;
-    z-index:5;
-    background:rgba(0,0,0,0.6);
-    padding:10px;
-    border-radius:10px;
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:5px;
-    max-height:40%;
-    overflow-y:auto;
-  ">
-    <button data-burc="koc">Koç</button>
-    <button data-burc="boga">Boğa</button>
-    <button data-burc="ikizler">İkizler</button>
-    <button data-burc="yengec">Yengeç</button>
-    <button data-burc="aslan">Aslan</button>
-    <button data-burc="basak">Başak</button>
-    <button data-burc="terazi">Terazi</button>
-    <button data-burc="akrep">Akrep</button>
-    <button data-burc="yay">Yay</button>
-    <button data-burc="oglak">Oğlak</button>
-    <button data-burc="kova">Kova</button>
-    <button data-burc="balik">Balık</button>
+  <!-- BUTONLAR -->
+  <div id="buttons">
+    <button onclick="runShow('koc')">Koç</button>
+    <button onclick="runShow('boga')">Boğa</button>
+    <button onclick="runShow('ikizler')">İkizler</button>
+    <button onclick="runShow('yengec')">Yengeç</button>
+    <button onclick="runShow('aslan')">Aslan</button>
+    <button onclick="runShow('basak')">Başak</button>
+    <button onclick="runShow('terazi')">Terazi</button>
+    <button onclick="runShow('akrep')">Akrep</button>
+    <button onclick="runShow('yay')">Yay</button>
+    <button onclick="runShow('oglak')">Oğlak</button>
+    <button onclick="runShow('kova')">Kova</button>
+    <button onclick="runShow('balik')">Balık</button>
   </div>
 
 </div>
