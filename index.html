@@ -3,38 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mizodiac Show</title>
-
-<!-- ✅ CSS BAĞLANTI -->
+<title>Mizodiac Show - Test</title>
 <link rel="stylesheet" href="style.css">
-
 </head>
 <body>
 
-  <div id="zodiac-container">
+<div id="zodiac-container">
 
-    <!-- 🖼️ ARKA PLAN -->
-    <img src="zodiac-background.jpg" id="zodiac-bg">
+  <img src="zodiac-background.jpg" id="zodiac-bg">
 
-    <!-- 🧿 BURÇ -->
-    <img id="burc-simge" class="hidden">
+  <img id="burc-simge" class="hidden">
+  <img id="element-icon" class="hidden">
 
-    <!-- 🌿 ELEMENT -->
-    <img id="element-icon" class="hidden">
+  <div id="ozellikler-display" class="hidden"></div>
+  <div id="sayi-display" class="hidden"></div>
 
-    <!-- 📝 ÖZELLİK -->
-    <div id="ozellikler-display" class="hidden"></div>
+  <!-- 🎥 Gezegen Video -->
+  <video id="gezegen-video" style="display:none;" muted></video>
 
-    <!-- 🔢 SAYI -->
-    <div id="sayi-display" class="hidden"></div>
-
-    <!-- 🎤 BUTON -->
-    <button id="play-btn">Burcunu Dinle ve Göster!</button>
-
+  <!-- 🔹 TEST BUTONLARI -->
+  <div id="test-buttons" style="position:absolute; top:5%; left:5%; z-index:5; background:rgba(0,0,0,0.5); padding:10px; border-radius:10px; display:flex; flex-wrap:wrap; gap:5px;">
+    <button onclick='runShow("koc")'>Koç</button>
+    <button onclick='runShow("boga")'>Boğa</button>
+    <button onclick='runShow("ikizler")'>İkizler</button>
+    <button onclick='runShow("yengec")'>Yengeç</button>
+    <button onclick='runShow("aslan")'>Aslan</button>
+    <button onclick='runShow("basak")'>Başak</button>
+    <button onclick='runShow("terazi")'>Terazi</button>
+    <button onclick='runShow("akrep")'>Akrep</button>
+    <button onclick='runShow("yay")'>Yay</button>
+    <button onclick='runShow("oglak")'>Oğlak</button>
+    <button onclick='runShow("kova")'>Kova</button>
+    <button onclick='runShow("balik")'>Balık</button>
   </div>
 
-  <!-- ✅ JS BAĞLANTI -->
-  <script src="script.js"></script>
+</div>
+
+<script src="script.js"></script>
+<script>
+  // Ses tanımayı geçici olarak kapatıyoruz
+  const btn = document.getElementById("play-btn");
+  btn.style.display = "none"; // "Burcunu Dinle ve Göster!" butonunu gizle
+</script>
 
 </body>
 </html>
