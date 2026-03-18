@@ -8,42 +8,47 @@
 </head>
 <body>
 
-<div id="zodiac-container">
+  <div id="zodiac-container">
 
-  <!-- Arka plan -->
-  <img src="zodiac-background.jpg" id="zodiac-bg">
+    <!-- 🖼️ ARKA PLAN -->
+    <img src="zodiac-background.jpg" id="zodiac-bg">
 
-  <!-- Burç simgesi -->
-  <img id="burc-simge" class="hidden">
+    <!-- 🧿 BURÇ -->
+    <img id="burc-simge" class="hidden">
 
-  <!-- Element simgesi -->
-  <img id="element-icon" class="hidden">
+    <!-- 🪐 GEZEGEN VIDEO -->
+    <video id="gezegen-video" class="hidden" muted autoplay playsinline></video>
 
-  <!-- Özellik ve sayı -->
-  <div id="ozellikler-display" class="hidden"></div>
-  <div id="sayi-display" class="hidden"></div>
+    <!-- 🌿 ELEMENT -->
+    <img id="element-icon" class="hidden">
 
-  <!-- Ana buton devre dışı -->
-  <button id="play-btn" disabled>Burcunu Dinle ve Göster! (mobilde devre dışı)</button>
+    <!-- 📝 ÖZELLİK -->
+    <div id="ozellikler-display" class="hidden"></div>
 
-  <!-- Test butonları -->
-  <div id="test-buttons">
-    <button onclick='runShow("koc")'>Koç</button>
-    <button onclick='runShow("boga")'>Boğa</button>
-    <button onclick='runShow("ikizler")'>İkizler</button>
-    <button onclick='runShow("yengec")'>Yengeç</button>
-    <button onclick='runShow("aslan")'>Aslan</button>
-    <button onclick='runShow("basak")'>Başak</button>
-    <button onclick='runShow("terazi")'>Terazi</button>
-    <button onclick='runShow("akrep")'>Akrep</button>
-    <button onclick='runShow("yay")'>Yay</button>
-    <button onclick='runShow("oglak")'>Oğlak</button>
-    <button onclick='runShow("kova")'>Kova</button>
-    <button onclick='runShow("balik")'>Balık</button>
+    <!-- 🔢 SAYI -->
+    <div id="sayi-display" class="hidden"></div>
+
+    <!-- 🎤 BURÇ DİNLE BUTONU -->
+    <button id="play-btn">Burcunu Dinle ve Göster!</button>
+
+    <!-- 🔹 TEST BUTONLARI -->
+    <div id="test-buttons">
+      <button onclick='runShow("koc")'>Koç</button>
+      <button onclick='runShow("boga")'>Boğa</button>
+      <button onclick='runShow("ikizler")'>İkizler</button>
+      <button onclick='runShow("yengec")'>Yengeç</button>
+      <button onclick='runShow("aslan")'>Aslan</button>
+      <button onclick='runShow("basak")'>Başak</button>
+      <button onclick='runShow("terazi")'>Terazi</button>
+      <button onclick='runShow("akrep")'>Akrep</button>
+      <button onclick='runShow("yay")'>Yay</button>
+      <button onclick='runShow("oglak")'>Oğlak</button>
+      <button onclick='runShow("kova")'>Kova</button>
+      <button onclick='runShow("balik")'>Balık</button>
+    </div>
+
   </div>
 
-</div>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
