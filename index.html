@@ -3,10 +3,29 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mizodiac Show</title><style>
-body{margin:0;background:black;overflow:hidden;font-family:sans-serif;}
-#container{position:relative;width:100vw;height:100vh;}
-#bg{position:absolute;width:100%;height:100%;object-fit:cover;}
+body{
+margin:0;
+background:black;
+overflow:hidden;
+font-family:sans-serif;
+}
 
+#container{
+position:relative;
+width:100vw;
+height:100vh;
+}
+
+/* ARKA PLAN */
+#bg{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:1;
+}
+
+/* BUTON */
 .burc-btn{
 position:absolute;
 transform:translate(-50%,-50%);
@@ -18,6 +37,7 @@ background:rgba(0,0,0,0.35);
 color:#fff;
 cursor:pointer;
 transition:.25s;
+z-index:2;
 }
 
 .burc-btn:hover{
@@ -26,18 +46,19 @@ color:#000;
 transform:translate(-50%,-50%) scale(1.2);
 }
 
+/* VIDEO FULLSCREEN */
 #video{
-position:absolute;
+position:fixed;
 top:0;
 left:0;
-width:100%;
-height:100%;
+width:100vw;
+height:100vh;
 object-fit:cover;
-display:none;
-z-index:99;
 background:black;
+display:none;
+z-index:999;
 }
-</style></head><body><div id="container"><img src="zodiac-background.jpg" id="bg"><video id="video" controls playsinline preload="auto"></video>
+</style></head><body><div id="container"><img src="zodiac-background.jpg" id="bg"><video id="video" controls playsinline></video>
 
 <button class="burc-btn" style="top:8%; left:50%;" data-video="mp4/koc.mp4">Koç</button>
 <button class="burc-btn" style="top:18%; left:72%;" data-video="mp4/boga.mp4">Boğa</button>
@@ -55,31 +76,38 @@ background:black;
 </div><script>
 
 const video = document.getElementById("video");
+const buttons = document.querySelectorAll(".burc-btn");
+const bg = document.getElementById("bg");
 
-document.querySelectorAll(".burc-btn").forEach(btn=>{
+buttons.forEach(btn=>{
 
-btn.addEventListener("click", ()=>{
+btn.onclick = ()=>{
 
 const file = btn.dataset.video;
 
-video.pause();
-video.currentTime = 0;
+/* ARKA PLANI VE BUTONLARI GİZLE */
+buttons.forEach(b=>b.style.display="none");
+bg.style.display="none";
 
 video.src = file;
 video.load();
 
-video.style.display = "block";
+video.style.display="block";
 
-video.play().catch(()=>{
-alert("Video yüklenemedi: " + file);
-});
+video.play();
 
-});
+};
 
 });
 
 video.onended = ()=>{
+
 video.style.display="none";
+
+/* GERİ GETİR */
+buttons.forEach(b=>b.style.display="block");
+bg.style.display="block";
+
 };
 
 </script></body>
