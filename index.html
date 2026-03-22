@@ -16,7 +16,6 @@ width:100vw;
 height:100vh;
 }
 
-/* ARKA PLAN */
 #bg{
 position:absolute;
 width:100%;
@@ -25,7 +24,6 @@ object-fit:cover;
 z-index:1;
 }
 
-/* BUTON */
 .burc-btn{
 position:absolute;
 transform:translate(-50%,-50%);
@@ -46,14 +44,14 @@ color:#000;
 transform:translate(-50%,-50%) scale(1.2);
 }
 
-/* VIDEO FULLSCREEN */
+/* ⭐ VIDEO TAMAMI GÖRÜNSÜN */
 #video{
 position:fixed;
 top:0;
 left:0;
 width:100vw;
 height:100vh;
-object-fit:cover;
+object-fit:contain;   /* 🔥 EN KRİTİK SATIR */
 background:black;
 display:none;
 z-index:999;
@@ -80,34 +78,24 @@ const buttons = document.querySelectorAll(".burc-btn");
 const bg = document.getElementById("bg");
 
 buttons.forEach(btn=>{
-
 btn.onclick = ()=>{
 
-const file = btn.dataset.video;
-
-/* ARKA PLANI VE BUTONLARI GİZLE */
 buttons.forEach(b=>b.style.display="none");
 bg.style.display="none";
 
-video.src = file;
+video.src = btn.dataset.video;
 video.load();
 
 video.style.display="block";
-
 video.play();
 
 };
-
 });
 
 video.onended = ()=>{
-
 video.style.display="none";
-
-/* GERİ GETİR */
 buttons.forEach(b=>b.style.display="block");
 bg.style.display="block";
-
 };
 
 </script></body>
