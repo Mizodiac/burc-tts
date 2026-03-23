@@ -2,57 +2,71 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mizodiac Show</title><style>
+<title>Mizodiac</title><style>
 body{
 margin:0;
-background:radial-gradient(circle at center,#000 40%,#020b25 100%);
-overflow:hidden;
+background:black;
 font-family:sans-serif;
-}
-
-/* SAHNE */
-#container{
-position:fixed;
-top:0;
-left:0;
-width:100vw;
-height:100vh;
+overflow:hidden;
 display:flex;
-align-items:center;
 justify-content:center;
-}
-
-/* ⭐ ARKA PLAN TAMAMI GÖRÜNSÜN */
-#bg{
-width:100vw;
+align-items:center;
 height:100vh;
+}
+
+/* ANA SAHNE */
+.scene{
+position:relative;
+width:600px;
+height:600px;
+}
+
+/* ÇARK */
+#wheel{
+position:absolute;
+width:100%;
+height:100%;
 object-fit:contain;
-position:absolute;
-z-index:1;
 }
 
-/* BUTON */
-.burc-btn{
+/* BUTON GRID */
+.row{
 position:absolute;
-transform:translate(-50%,-50%);
-padding:8px 14px;
-font-size:15px;
+width:100%;
+display:flex;
+justify-content:space-between;
+}
+
+/* ÜST 1 */
+.row.top1{ top:-150px; }
+
+/* ÜST 2 */
+.row.top2{ top:-70px; }
+
+/* ALT */
+.row.bottom{ bottom:-120px; }
+
+/* SARI BUTON */
+.burc{
+width:130px;
+height:60px;
+background:linear-gradient(#ffd400,#f0b800);
 border-radius:12px;
-border:1px solid rgba(255,255,255,0.6);
-background:rgba(0,0,0,0.35);
-color:#fff;
+display:flex;
+justify-content:center;
+align-items:center;
+font-weight:bold;
+font-size:18px;
 cursor:pointer;
+box-shadow:0 6px 14px rgba(0,0,0,.6);
 transition:.25s;
-z-index:2;
 }
 
-.burc-btn:hover{
-background:gold;
-color:#000;
-transform:translate(-50%,-50%) scale(1.2);
+.burc:hover{
+transform:scale(1.08);
 }
 
-/* ⭐ VIDEO TAMAMI GÖRÜNSÜN */
+/* VIDEO */
 #video{
 position:fixed;
 top:0;
@@ -64,52 +78,44 @@ background:black;
 display:none;
 z-index:999;
 }
-</style></head><body><div id="container"><img src="zodiac-background.jpg" id="bg"><video id="video" controls playsinline preload="auto"></video>
+</style></head><body><div class="scene"><img src="zodiac-background.jpg" id="wheel"><!-- ÜST SIRA 1 --><div class="row top1">
+<div class="burc" data-video="mp4/koc.mp4">Koç</div>
+<div class="burc" data-video="mp4/boga.mp4">Boğa</div>
+<div class="burc" data-video="mp4/ikizler.mp4">İkizler</div>
+<div class="burc" data-video="mp4/yengec.mp4">Yengeç</div>
+</div><!-- ÜST SIRA 2 --><div class="row top2">
+<div class="burc" data-video="mp4/aslan.mp4">Aslan</div>
+<div class="burc" data-video="mp4/basak.mp4">Başak</div>
+<div class="burc" data-video="mp4/terazi.mp4">Terazi</div>
+<div class="burc" data-video="mp4/akrep.mp4">Akrep</div>
+</div><!-- ALT SIRA --><div class="row bottom">
+<div class="burc" data-video="mp4/yay.mp4">Yay</div>
+<div class="burc" data-video="mp4/oglak.mp4">Oğlak</div>
+<div class="burc" data-video="mp4/kova.mp4">Kova</div>
+<div class="burc" data-video="mp4/balik.mp4">Balık</div>
+</div></div><video id="video" controls playsinline></video>
 
-<button class="burc-btn" style="top:8%; left:50%;" data-video="mp4/koc.mp4">Koç</button>
-<button class="burc-btn" style="top:18%; left:72%;" data-video="mp4/boga.mp4">Boğa</button>
-<button class="burc-btn" style="top:35%; left:88%;" data-video="mp4/ikizler.mp4">İkizler</button>
-<button class="burc-btn" style="top:58%; left:90%;" data-video="mp4/yengec.mp4">Yengeç</button>
-<button class="burc-btn" style="top:78%; left:75%;" data-video="mp4/aslan.mp4">Aslan</button>
-<button class="burc-btn" style="top:90%; left:50%;" data-video="mp4/basak.mp4">Başak</button>
-<button class="burc-btn" style="top:78%; left:25%;" data-video="mp4/terazi.mp4">Terazi</button>
-<button class="burc-btn" style="top:58%; left:10%;" data-video="mp4/akrep.mp4">Akrep</button>
-<button class="burc-btn" style="top:35%; left:12%;" data-video="mp4/yay.mp4">Yay</button>
-<button class="burc-btn" style="top:18%; left:28%;" data-video="mp4/oglak.mp4">Oğlak</button>
-<button class="burc-btn" style="top:10%; left:38%;" data-video="mp4/kova.mp4">Kova</button>
-<button class="burc-btn" style="top:10%; left:62%;" data-video="mp4/balik.mp4">Balık</button>
-
-</div><script>
+<script>
 
 const video = document.getElementById("video");
-const buttons = document.querySelectorAll(".burc-btn");
-const bg = document.getElementById("bg");
 
-buttons.forEach(btn=>{
+document.querySelectorAll(".burc").forEach(btn=>{
 btn.onclick = ()=>{
 
-buttons.forEach(b=>b.style.display="none");
-bg.style.display="none";
-
 video.pause();
-video.currentTime = 0;
+video.currentTime=0;
 
 video.src = btn.dataset.video;
 video.load();
 
 video.style.display="block";
-
-video.play().catch(()=>{
-alert("Video yüklenemedi");
-});
+video.play();
 
 };
 });
 
 video.onended = ()=>{
 video.style.display="none";
-buttons.forEach(b=>b.style.display="block");
-bg.style.display="block";
 };
 
 </script></body>
