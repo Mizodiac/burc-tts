@@ -5,25 +5,33 @@
 <title>Mizodiac Show</title><style>
 body{
 margin:0;
-background:black;
+background:radial-gradient(circle at center,#000 40%,#020b25 100%);
 overflow:hidden;
 font-family:sans-serif;
 }
 
+/* SAHNE */
 #container{
-position:relative;
+position:fixed;
+top:0;
+left:0;
 width:100vw;
 height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
+/* ⭐ ARKA PLAN TAMAMI GÖRÜNSÜN */
 #bg{
+width:100vw;
+height:100vh;
+object-fit:contain;
 position:absolute;
-width:100%;
-height:100%;
-object-fit:cover;
 z-index:1;
 }
 
+/* BUTON */
 .burc-btn{
 position:absolute;
 transform:translate(-50%,-50%);
@@ -51,12 +59,12 @@ top:0;
 left:0;
 width:100vw;
 height:100vh;
-object-fit:contain;   /* 🔥 EN KRİTİK SATIR */
+object-fit:contain;
 background:black;
 display:none;
 z-index:999;
 }
-</style></head><body><div id="container"><img src="zodiac-background.jpg" id="bg"><video id="video" controls playsinline></video>
+</style></head><body><div id="container"><img src="zodiac-background.jpg" id="bg"><video id="video" controls playsinline preload="auto"></video>
 
 <button class="burc-btn" style="top:8%; left:50%;" data-video="mp4/koc.mp4">Koç</button>
 <button class="burc-btn" style="top:18%; left:72%;" data-video="mp4/boga.mp4">Boğa</button>
@@ -83,11 +91,17 @@ btn.onclick = ()=>{
 buttons.forEach(b=>b.style.display="none");
 bg.style.display="none";
 
+video.pause();
+video.currentTime = 0;
+
 video.src = btn.dataset.video;
 video.load();
 
 video.style.display="block";
-video.play();
+
+video.play().catch(()=>{
+alert("Video yüklenemedi");
+});
 
 };
 });
