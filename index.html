@@ -46,9 +46,6 @@ margin-bottom:2vw;
 position:absolute;
 top:100%;
 width:100%;
-display:flex;
-justify-content:space-between;
-gap:2vw;
 margin-top:2vw;
 }
 
@@ -61,6 +58,7 @@ gap:2vw;
 
 /* BUTON */
 .burc{
+width:100%;
 height:12vw;
 max-height:60px;
 background:linear-gradient(#ffd400,#f0b800);
@@ -92,7 +90,7 @@ display:none;
 z-index:999;
 }
 
-</style></head><body><div class="scene"><img src="zodiac-background.jpg" id="wheel"><!-- ÜST 8 BUTON --><div class="topBlock"><div class="row">
+</style></head><body><div class="scene"><img src="zodiac-background.jpg" id="wheel"><!-- ÜST 8 --><div class="topBlock"><div class="row">
 <div class="burc" data-video="mp4/koc.mp4">Koç</div>
 <div class="burc" data-video="mp4/boga.mp4">Boğa</div>
 <div class="burc" data-video="mp4/ikizler.mp4">İkizler</div>
@@ -102,11 +100,13 @@ z-index:999;
 <div class="burc" data-video="mp4/basak.mp4">Başak</div>
 <div class="burc" data-video="mp4/terazi.mp4">Terazi</div>
 <div class="burc" data-video="mp4/akrep.mp4">Akrep</div>
-</div></div><!-- ALT 4 BUTON --><div class="bottomBlock">
+</div></div><!-- ALT 4 --><div class="bottomBlock">
+<div class="row">
 <div class="burc" data-video="mp4/yay.mp4">Yay</div>
 <div class="burc" data-video="mp4/oglak.mp4">Oğlak</div>
 <div class="burc" data-video="mp4/kova.mp4">Kova</div>
 <div class="burc" data-video="mp4/balik.mp4">Balık</div>
+</div>
 </div></div><video id="video" controls playsinline></video>
 
 <script>
