@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Burç</title>
+
+<style>
+body{
+    margin:0;
+    overflow:hidden;
+    font-family:Arial;
+}
+
+/* ARKA PLAN */
+.bg{
+    position:fixed;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* BUTON */
+button{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    
+    background:linear-gradient(#FFD700,#D4AF37);
+    font-size:40px;
+    padding:20px 60px;
+    border-radius:20px;
+    border:none;
+    cursor:pointer;
+    box-shadow:0 0 25px gold;
+}
+
+/* VIDEO */
+video{
+    position:fixed;
+    width:100%;
+    height:100%;
+    display:none;
+    background:black;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ORTAK ARKA PLAN -->
+<img src="zodiac-background.jpg" class="bg">
+
+<button id="btn" onclick="play()"></button>
+<video id="v" controls></video>
+
+<script>
+const burclar = {
+    koc: "KOÇ",
+    boga: "BOĞA",
+    ikizler: "İKİZLER",
+    yengec: "YENGEÇ",
+    aslan: "ASLAN",
+    basak: "BAŞAK",
+    terazi: "TERAZİ",
+    akrep: "AKREP",
+    yay: "YAY",
+    oglak: "OĞLAK",
+    kova: "KOVA",
+    balik: "BALIK"
+};
+
+// URL'den burç al
+const urlParams = new URLSearchParams(window.location.search);
+const burc = urlParams.get("burc");
+
+// default koç
+const secilen = burc && burclar[burc] ? burc : "koc";
+
+// buton yazısı
+document.getElementById("btn").innerText = burclar[secilen];
+
+// video oynat
+function play(){
+    const v = document.getElementById("v");
+    v.src = secilen + "/" + secilen + ".mp4";
+    v.style.display = "block";
+    v.play();
+}
+
+// kapatma
+document.getElementById("v").onclick = function(){
+    this.pause();
+    this.style.display = "none";
+};
+</script>
+
+</body>
+</html>
