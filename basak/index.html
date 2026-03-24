@@ -1,135 +1,21 @@
 <!DOCTYPE html>
 <html lang="tr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Burç Deneyimi</title>
-
+<head><meta charset="UTF-8"><title>Başak</title>
 <style>
-html, body {
-  margin:0;
-  padding:0;
-  height:100%;
-  width:100%;
-  overflow:hidden;
-  font-family:sans-serif;
-}
-
-body {
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:black;
-  position:relative;
-}
-
-#bg {
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  z-index:-2;
-}
-
-#overlay {
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.35);
-  z-index:-1;
-}
-
-#btn {
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%, -50%);
-  padding:18px 30px;
-  font-size:20px;
-  background:gold;
-  color:black;
-  border:none;
-  border-radius:12px;
-  cursor:pointer;
-  box-shadow:0 6px 14px rgba(0,0,0,.6);
-  transition:0.3s;
-}
-
-#btn:hover {
-  transform:translate(-50%, -50%) scale(1.05);
-}
-
-#video {
-  position:fixed;
-  top:0;
-  left:0;
-  width:100vw;
-  height:100vh;
-  object-fit:cover;
-  background:black;
-  display:none;
-  z-index:2;
-}
-</style>
-</head>
-
+body{margin:0;overflow:hidden;}
+.bg{position:fixed;width:100%;height:100%;object-fit:cover;}
+button{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+background:linear-gradient(#FFD700,#D4AF37);
+font-size:40px;padding:20px 60px;border-radius:20px;border:none;cursor:pointer;box-shadow:0 0 25px gold;}
+video{position:fixed;width:100%;height:100%;display:none;background:black;}
+</style></head>
 <body>
-
-<img id="bg">
-<div id="overlay"></div>
-<button id="btn"></button>
-<video id="video" controls playsinline></video>
-
+<img src="basak.jpg" class="bg">
+<button onclick="play()">BAŞAK</button>
+<video id="v" controls></video>
 <script>
-// Burç klasörü adı (örnek: basak)
-const burc = "basak";
-
-// Burç isimleri
-const isimler = {
-koc:"Koç",
-boga:"Boğa",
-ikizler:"İkizler",
-yengec:"Yengeç",
-aslan:"Aslan",
-basak:"Başak",
-terazi:"Terazi",
-akrep:"Akrep",
-yay:"Yay",
-oglak:"Oğlak",
-kova:"Kova",
-balik:"Balık"
-};
-
-// Elementler
-const btn = document.getElementById("btn");
-const video = document.getElementById("video");
-const bg = document.getElementById("bg");
-const overlay = document.getElementById("overlay");
-
-// Dosyaları bağla
-video.src = burc + ".mp4";
-bg.src = burc + ".jpg";
-
-// Buton yazısı
-btn.innerText = isimler[burc] + " Burcunu İzle";
-
-// Tıklayınca video aç ve overlay karart
-btn.onclick = ()=>{
-  video.style.display = "block";
-  overlay.style.background = "rgba(0,0,0,0.7)";
-  video.play();
-};
-
-// Video bitince kapat ve overlay geri
-video.onended = ()=>{
-  video.style.display = "none";
-  overlay.style.background = "rgba(0,0,0,0.35)";
-};
+function play(){v.src="basak.mp4";v.style.display="block";v.play();}
+v.onclick=()=>{v.pause();v.style.display="none";}
 </script>
-
 </body>
 </html>
