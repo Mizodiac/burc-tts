@@ -9,18 +9,28 @@
 body{
     margin:0;
     overflow:hidden;
-    font-family:Arial;
+    font-family:Arial, sans-serif;
 }
 
-/* ARKA PLAN */
+/* BLUR ARKA PLAN */
+.bg-blur{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:url("zodiac-background.jpg") center/cover no-repeat;
+    filter:blur(25px);
+    z-index:-1;
+}
+
+/* ANA GÖRSEL (KESİLMEDEN TAM GÖRÜNÜR) */
 .bg{
     position:fixed;
     width:100%;
     height:100%;
-    object-fit:cover;
+    object-fit:contain;
 }
 
-/* BUTON */
+/* ORTA BUTON */
 button{
     position:absolute;
     top:50%;
@@ -28,12 +38,23 @@ button{
     transform:translate(-50%,-50%);
     
     background:linear-gradient(#FFD700,#D4AF37);
+    color:black;
+    
     font-size:40px;
+    font-weight:bold;
+    
     padding:20px 60px;
     border-radius:20px;
     border:none;
+    
     cursor:pointer;
     box-shadow:0 0 25px gold;
+    
+    transition:0.3s;
+}
+
+button:hover{
+    transform:translate(-50%,-50%) scale(1.1);
 }
 
 /* VIDEO */
@@ -49,7 +70,7 @@ video{
 
 <body>
 
-<!-- ORTAK ARKA PLAN -->
+<div class="bg-blur"></div>
 <img src="zodiac-background.jpg" class="bg">
 
 <button id="btn" onclick="play()"></button>
@@ -71,11 +92,11 @@ const burclar = {
     balik: "BALIK"
 };
 
-// URL'den burç al
+// URL parametresi
 const urlParams = new URLSearchParams(window.location.search);
 const burc = urlParams.get("burc");
 
-// default koç
+// default: koç
 const secilen = burc && burclar[burc] ? burc : "koc";
 
 // buton yazısı
@@ -89,7 +110,7 @@ function play(){
     v.play();
 }
 
-// kapatma
+// videoya tıklayınca kapat
 document.getElementById("v").onclick = function(){
     this.pause();
     this.style.display = "none";
