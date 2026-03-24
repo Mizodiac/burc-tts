@@ -30,22 +30,26 @@ body{
     object-fit:contain;
 }
 
-/* BURÇ BUTONLARI */
-.burc-btn{
+/* ORTA BUTON */
+button{
     position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
     background:linear-gradient(#FFD700,#D4AF37);
     color:black;
-    font-size:20px;
+    font-size:30px;      /* biraz daha küçük */
     font-weight:bold;
-    padding:10px 25px;
-    border-radius:15px;
+    padding:15px 40px;   /* buton küçüldü */
+    border-radius:20px;
     border:none;
     cursor:pointer;
-    box-shadow:0 0 15px gold;
+    box-shadow:0 0 20px gold;
     transition:0.3s;
 }
-.burc-btn:hover{
-    transform:scale(1.1);
+
+button:hover{
+    transform:translate(-50%,-50%) scale(1.1);
 }
 
 /* VIDEO */
@@ -64,35 +68,46 @@ video{
 <div class="bg-blur"></div>
 <img src="zodiac-background.jpg" class="bg">
 
-<!-- BURÇ BUTONLARI -->
-<button class="burc-btn" data-burc="koc" style="top:45%; left:50%;">KOÇ</button>
-<button class="burc-btn" data-burc="boga" style="top:55%; left:60%;">BOĞA</button>
-<button class="burc-btn" data-burc="ikizler" style="top:50%; left:65%;">İKİZLER</button>
-<button class="burc-btn" data-burc="yengec" style="top:60%; left:55%;">YENGEÇ</button>
-<button class="burc-btn" data-burc="aslan" style="top:40%; left:60%;">ASLAN</button>
-<button class="burc-btn" data-burc="basak" style="top:50%; left:70%;">BAŞAK</button>
-<button class="burc-btn" data-burc="terazi" style="top:55%; left:45%;">TERAZİ</button>
-<button class="burc-btn" data-burc="akrep" style="top:65%; left:50%;">AKREP</button>
-<button class="burc-btn" data-burc="yay" style="top:50%; left:40%;">YAY</button>
-<button class="burc-btn" data-burc="oglak" style="top:60%; left:35%;">OĞLAK</button>
-<button class="burc-btn" data-burc="kova" style="top:45%; left:40%;">KOVA</button>
-<button class="burc-btn" data-burc="balik" style="top:35%; left:50%;">BALIK</button>
-
+<button id="btn"></button>
 <video id="v" controls></video>
 
 <script>
-// Tüm butonlara tıklama eventi
-document.querySelectorAll(".burc-btn").forEach(btn=>{
-    btn.onclick = function(){
-        const burc = this.dataset.burc;
-        const v = document.getElementById("v");
-        v.src = burc + "/" + burc + ".mp4";
-        v.style.display = "block";
-        v.play();
-    }
-});
+// Burçlar
+const burclar = {
+    koc: "KOÇ",
+    boga: "BOĞA",
+    ikizler: "İKİZLER",
+    yengec: "YENGEÇ",
+    aslan: "ASLAN",
+    basak: "BAŞAK",
+    terazi: "TERAZİ",
+    akrep: "AKREP",
+    yay: "YAY",
+    oglak: "OĞLAK",
+    kova: "KOVA",
+    balik: "BALIK"
+};
 
-// Videoya tıklayınca kapat
+// URL parametresi
+const urlParams = new URLSearchParams(window.location.search);
+const burc = urlParams.get("burc");
+
+// default: koç
+const secilen = burc && burclar[burc] ? burc : "koc";
+
+// buton yazısı
+const btn = document.getElementById("btn");
+btn.innerText = burclar[secilen];
+
+// video oynat
+btn.onclick = function(){
+    const v = document.getElementById("v");
+    v.src = secilen + "/" + secilen + ".mp4";
+    v.style.display = "block";
+    v.play();
+};
+
+// videoya tıklayınca kapat
 document.getElementById("v").onclick = function(){
     this.pause();
     this.style.display = "none";
