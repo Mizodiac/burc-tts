@@ -28,7 +28,7 @@ body{
     width:100%;
     height:100%;
     object-fit:contain;
-    z-index:0; /* Butonun altında */
+    z-index:0;
 }
 
 /* ORTA BUTON */
@@ -47,7 +47,7 @@ button{
     cursor:pointer;
     box-shadow:0 0 20px gold;
     transition:0.3s;
-    z-index:5; /* Her zaman üstte */
+    z-index:5;
 }
 
 button:hover{
@@ -64,7 +64,7 @@ video{
     z-index:1;
 }
 
-/* TEBRİK MESAJI TAM EKRAN */
+/* TEBRİK MESAJI */
 #tebrikMessage{
     display:none;
     position:fixed;
@@ -72,11 +72,10 @@ video{
     left:0;
     width:100%;
     height:100%;
-    background-color:black; /* Ekranı tamamen karartır */
+    background-color:black;
     color:#FFD700;
     font-size:32px;
     text-align:center;
-    display:flex;
     justify-content:center;
     align-items:center;
     flex-direction:column;
@@ -120,7 +119,7 @@ const burclar = {
 // URL parametreleri
 const urlParams = new URLSearchParams(window.location.search);
 const burc = urlParams.get("burc");
-const id = urlParams.get("id"); // Müşteri ID
+const id = urlParams.get("id");
 
 // default: koç
 const secilen = burc && burclar[burc] ? burc : "koc";
@@ -129,11 +128,11 @@ const secilen = burc && burclar[burc] ? burc : "koc";
 const btn = document.getElementById("btn");
 btn.innerText = burclar[secilen];
 
-// video ve mesaj elementleri
+// elementler
 const v = document.getElementById("v");
 const tebrik = document.getElementById("tebrikMessage");
 
-// butona tıklayınca video aç
+// buton click
 btn.onclick = function(){
     v.src = secilen + "/" + secilen + ".mp4";
     v.style.display = "block";
@@ -141,28 +140,26 @@ btn.onclick = function(){
 
     console.log("Müşteri ID:", id);
 
-    // Videoya tıklayınca kapat
+    // videoya tıklayınca kapat
     v.onclick = function(){
-        this.pause();
-        this.style.display = "none";
+        v.pause();
+        v.style.display = "none";
         tebrik.style.opacity = 0;
-        setTimeout(() => { tebrik.style.display = 'none'; }, 1000);
+        setTimeout(() => tebrik.style.display = "none", 1000);
     };
 
-    // Video bittiğinde 10 saniyelik fade-in/fade-out tebrik mesajı
-    v.addEventListener("ended", () => {
-        v.style.display = "none"; // Video kapanır
-        tebrik.style.display = "flex"; // Mesaj ekranı görünür
+    // video bitince
+    v.onended = function(){
+        v.style.display = "none";
 
-        // Fade-in
-        setTimeout(() => { tebrik.style.opacity = 1; }, 50);
+        tebrik.style.display = "flex";
+        setTimeout(() => tebrik.style.opacity = 1, 50);
 
-        // 10 saniye sonra fade-out
         setTimeout(() => {
             tebrik.style.opacity = 0;
-            setTimeout(() => { tebrik.style.display = "none"; }, 1000);
+            setTimeout(() => tebrik.style.display = "none", 1000);
         }, 10000);
-    });
+    };
 };
 </script>
 
