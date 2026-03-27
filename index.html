@@ -134,6 +134,9 @@ const tebrik = document.getElementById("tebrikMessage");
 
 // buton click
 btn.onclick = function(){
+
+    btn.style.display = "none"; // 🔥 BUTON GİZLENİR
+
     v.src = secilen + "/" + secilen + ".mp4";
     v.style.display = "block";
     v.play();
@@ -146,6 +149,8 @@ btn.onclick = function(){
         v.style.display = "none";
         tebrik.style.opacity = 0;
         setTimeout(() => tebrik.style.display = "none", 1000);
+
+        btn.style.display = "block"; // 🔥 BUTON GERİ GELİR
     };
 
     // video bitince
@@ -157,7 +162,10 @@ btn.onclick = function(){
 
         setTimeout(() => {
             tebrik.style.opacity = 0;
-            setTimeout(() => tebrik.style.display = "none", 1000);
+            setTimeout(() => {
+                tebrik.style.display = "none";
+                btn.style.display = "block"; // 🔥 BUTON GERİ GELİR
+            }, 1000);
         }, 10000);
     };
 };
