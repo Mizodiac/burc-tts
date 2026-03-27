@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
@@ -7,58 +7,61 @@
 
 <style>
 body{
-    margin:0;
-    overflow:hidden;
-    font-family:Arial, sans-serif;
+    margin:0;
+    overflow:hidden;
+    font-family:Arial, sans-serif;
 } 
 
 /* BLUR ARKA PLAN */
 .bg-blur{
-    position:fixed;
-    width:100%;
-    height:100%;
-    background:url("zodiac-background.jpg") center/cover no-repeat;
-    filter:blur(25px);
-    z-index:-1;
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:url("zodiac-background.jpg") center/cover no-repeat;
+    filter:blur(25px);
+    z-index:-2;
 } 
 
 /* ANA GÖRSEL */
 .bg{
-    position:fixed;
-    width:100%;
-    height:100%;
-    object-fit:contain;
+    position:fixed;
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    z-index:-1;
 } 
 
 /* ORTA BUTON */
 button{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    background:linear-gradient(#FFD700,#D4AF37);
-    color:black;
-    font-size:30px;      /* biraz daha küçük */
-    font-weight:bold;
-    padding:15px 40px;   /* buton küçüldü */
-    border-radius:20px;
-    border:none;
-    cursor:pointer;
-    box-shadow:0 0 20px gold;
-    transition:0.3s;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:linear-gradient(#FFD700,#D4AF37);
+    color:black;
+    font-size:30px;
+    font-weight:bold;
+    padding:15px 40px;
+    border-radius:20px;
+    border:none;
+    cursor:pointer;
+    box-shadow:0 0 20px gold;
+    transition:0.3s;
+    z-index:2;
 } 
 
 button:hover{
-    transform:translate(-50%,-50%) scale(1.1);
+    transform:translate(-50%,-50%) scale(1.1);
 } 
 
 /* VIDEO */
 video{
-    position:fixed;
-    width:100%;
-    height:100%;
-    display:none;
-    background:black;
+    position:fixed;
+    width:100%;
+    height:100%;
+    display:none;
+    background:black;
+    z-index:1;
 }
 </style>
 </head> 
@@ -69,23 +72,23 @@ video{
 <img src="zodiac-background.jpg" class="bg"> 
 
 <button id="btn"></button>
-<video id="v" controls></video> 
+<video id="v"></video> 
 
 <script>
 // Burçlar
 const burclar = {
-    koc: "KOÇ",
-    boga: "BOĞA",
-    ikizler: "İKİZLER",
-    yengec: "YENGEÇ",
-    aslan: "ASLAN",
-    basak: "BAŞAK",
-    terazi: "TERAZİ",
-    akrep: "AKREP",
-    yay: "YAY",
-    oglak: "OĞLAK",
-    kova: "KOVA",
-    balik: "BALIK"
+    koc: "KOÇ",
+    boga: "BOĞA",
+    ikizler: "İKİZLER",
+    yengec: "YENGEÇ",
+    aslan: "ASLAN",
+    basak: "BAŞAK",
+    terazi: "TERAZİ",
+    akrep: "AKREP",
+    yay: "YAY",
+    oglak: "OĞLAK",
+    kova: "KOVA",
+    balik: "BALIK"
 }; 
 
 // URL parametresi
@@ -101,16 +104,18 @@ btn.innerText = burclar[secilen];
 
 // video oynat
 btn.onclick = function(){
-    const v = document.getElementById("v");
-    v.src = secilen + "/" + secilen + ".mp4";
-    v.style.display = "block";
-    v.play();
+    const v = document.getElementById("v");
+    v.src = secilen + "/" + secilen + ".mp4";
+    v.style.display = "block";
+    v.play();
+    btn.style.display = "none"; // butonu gizle
 }; 
 
 // videoya tıklayınca kapat
 document.getElementById("v").onclick = function(){
-    this.pause();
-    this.style.display = "none";
+    this.pause();
+    this.style.display = "none";
+    btn.style.display = "block"; // butonu geri getir
 };
 </script> 
 
