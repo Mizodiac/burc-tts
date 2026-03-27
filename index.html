@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Burç</title> 
+<title>Burç</title>
 
 <style>
 body{
     margin:0;
     overflow:hidden;
     font-family:Arial, sans-serif;
-} 
+}
 
 /* BLUR ARKA PLAN */
 .bg-blur{
@@ -19,8 +19,8 @@ body{
     height:100%;
     background:url("zodiac-background.jpg") center/cover no-repeat;
     filter:blur(25px);
-    z-index:-2;
-} 
+    z-index:-1;
+}
 
 /* ANA GÖRSEL */
 .bg{
@@ -28,10 +28,10 @@ body{
     width:100%;
     height:100%;
     object-fit:contain;
-    z-index:-1;
-} 
+    z-index:0;
+}
 
-/* ORTA BUTON */
+/* BUTON */
 button{
     position:absolute;
     top:50%;
@@ -39,20 +39,20 @@ button{
     transform:translate(-50%,-50%);
     background:linear-gradient(#FFD700,#D4AF37);
     color:black;
-    font-size:30px;
+    font-size:28px;
     font-weight:bold;
-    padding:15px 40px;
+    padding:12px 35px;
     border-radius:20px;
     border:none;
     cursor:pointer;
     box-shadow:0 0 20px gold;
     transition:0.3s;
-    z-index:2;
-} 
+    z-index:5;
+}
 
 button:hover{
     transform:translate(-50%,-50%) scale(1.1);
-} 
+}
 
 /* VIDEO */
 video{
@@ -64,15 +64,15 @@ video{
     z-index:1;
 }
 </style>
-</head> 
+</head>
 
-<body> 
+<body>
 
 <div class="bg-blur"></div>
-<img src="zodiac-background.jpg" class="bg"> 
+<img src="zodiac-background.jpg" class="bg">
 
 <button id="btn"></button>
-<video id="v"></video> 
+<video id="v" controls></video>
 
 <script>
 // Burçlar
@@ -89,35 +89,52 @@ const burclar = {
     oglak: "OĞLAK",
     kova: "KOVA",
     balik: "BALIK"
-}; 
+};
 
-// URL parametresi
+// Parametreler
 const urlParams = new URLSearchParams(window.location.search);
-const burc = urlParams.get("burc"); 
+const burc = urlParams.get("burc");
+const id = urlParams.get("id");
 
-// default: koç
-const secilen = burc && burclar[burc] ? burc : "koc"; 
+// seçim
+const secilen = burc && burclar[burc] ? burc : "koc";
 
-// buton yazısı
+// elementler
 const btn = document.getElementById("btn");
-btn.innerText = burclar[secilen]; 
+const v = document.getElementById("v");
 
-// video oynat
+btn.innerText = burclar[secilen];
+
+// BAŞLAT
 btn.onclick = function(){
-    const v = document.getElementById("v");
+    btn.style.display = "none";
+
     v.src = secilen + "/" + secilen + ".mp4";
     v.style.display = "block";
     v.play();
-    btn.style.display = "none"; // butonu gizle
-}; 
 
-// videoya tıklayınca kapat
-document.getElementById("v").onclick = function(){
-    this.pause();
-    this.style.display = "none";
-    btn.style.display = "block"; // butonu geri getir
+    console.log("Müşteri ID:", id);
 };
-</script> 
+
+// VIDEOYA TIKLAYINCA KAPAT
+v.onclick = function(){
+    resetEkran();
+};
+
+// VIDEO BİTİNCE
+v.onended = function(){
+    resetEkran(); // 🔥 TAM RESET
+};
+
+// 🔥 HER ŞEYİ BAŞA SAR
+function resetEkran(){
+    v.pause();
+    v.currentTime = 0;
+    v.style.display = "none";
+
+    btn.style.display = "block"; // tekrar ortada
+}
+</script>
 
 </body>
 </html>
