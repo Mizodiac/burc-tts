@@ -38,9 +38,9 @@ button{
     transform:translate(-50%,-50%);
     background:linear-gradient(#FFD700,#D4AF37);
     color:black;
-    font-size:30px;      /* biraz daha küçük */
+    font-size:28px;
     font-weight:bold;
-    padding:15px 40px;   /* buton küçüldü */
+    padding:12px 35px;
     border-radius:20px;
     border:none;
     cursor:pointer;
@@ -88,9 +88,10 @@ const burclar = {
     balik: "BALIK"
 };
 
-// URL parametresi
+// URL parametreleri
 const urlParams = new URLSearchParams(window.location.search);
 const burc = urlParams.get("burc");
+const id = urlParams.get("id"); // Müşteri ID
 
 // default: koç
 const secilen = burc && burclar[burc] ? burc : "koc";
@@ -99,12 +100,15 @@ const secilen = burc && burclar[burc] ? burc : "koc";
 const btn = document.getElementById("btn");
 btn.innerText = burclar[secilen];
 
-// video oynat
+// butona tıklayınca video aç
 btn.onclick = function(){
     const v = document.getElementById("v");
     v.src = secilen + "/" + secilen + ".mp4";
     v.style.display = "block";
     v.play();
+
+    // Müşteri ID loglama
+    console.log("Müşteri ID:", id);
 };
 
 // videoya tıklayınca kapat
