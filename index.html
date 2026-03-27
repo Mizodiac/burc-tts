@@ -31,7 +31,7 @@ body{
     z-index:0;
 }
 
-/* ORTA BUTON */
+/* BUTON */
 button{
     position:absolute;
     top:50%;
@@ -72,7 +72,7 @@ video{
     left:0;
     width:100%;
     height:100%;
-    background-color:black;
+    background:black;
     color:#FFD700;
     font-size:32px;
     text-align:center;
@@ -116,59 +116,68 @@ const burclar = {
     balik: "BALIK"
 };
 
-// URL parametreleri
+// Parametreler
 const urlParams = new URLSearchParams(window.location.search);
 const burc = urlParams.get("burc");
 const id = urlParams.get("id");
 
-// default: koç
+// seçim
 const secilen = burc && burclar[burc] ? burc : "koc";
 
-// buton yazısı
-const btn = document.getElementById("btn");
-btn.innerText = burclar[secilen];
-
 // elementler
+const btn = document.getElementById("btn");
 const v = document.getElementById("v");
 const tebrik = document.getElementById("tebrikMessage");
 
-// buton click
+btn.innerText = burclar[secilen];
+
+// BAŞLAT
 btn.onclick = function(){
 
-    btn.style.display = "none"; // 🔥 BUTON GİZLENİR
+    btn.style.display = "none";
 
     v.src = secilen + "/" + secilen + ".mp4";
     v.style.display = "block";
     v.play();
 
     console.log("Müşteri ID:", id);
+};
 
-    // videoya tıklayınca kapat
-    v.onclick = function(){
-        v.pause();
-        v.style.display = "none";
+// VIDEOYA TIKLAYINCA KAPAT
+v.onclick = function(){
+    resetEkran();
+};
+
+// VIDEO BİTİNCE
+v.onended = function(){
+
+    v.style.display = "none";
+
+    tebrik.style.display = "flex";
+    setTimeout(() => tebrik.style.opacity = 1, 50);
+
+    setTimeout(() => {
         tebrik.style.opacity = 0;
-        setTimeout(() => tebrik.style.display = "none", 1000);
-
-        btn.style.display = "block"; // 🔥 BUTON GERİ GELİR
-    };
-
-    // video bitince
-    v.onended = function(){
-        v.style.display = "none";
-
-        tebrik.style.display = "flex";
-        setTimeout(() => tebrik.style.opacity = 1, 50);
 
         setTimeout(() => {
-            tebrik.style.opacity = 0;
-            setTimeout(() => {
-                tebrik.style.display = "none";
-                btn.style.display = "block"; // 🔥 BUTON GERİ GELİR
-            }, 1000);
-        }, 10000);
-    };
+            tebrik.style.display = "none";
+            resetEkran(); // 🔥 TAM RESET
+        }, 1000);
+
+    }, 10000);
 };
+
+// 🔥 HER ŞEYİ BAŞA SAR
+function resetEkran(){
+    v.pause();
+    v.currentTime = 0;
+    v.style.display = "none";
+
+    tebrik.style.opacity = 0;
+    tebrik.style.display = "none";
+
+    btn.style.display = "block"; // tekrar ortada
+}
 </script>
 
 </body>
