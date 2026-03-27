@@ -60,6 +60,22 @@ video{
     display:none;
     background:black;
 }
+
+/* TEBRİK MESAJI */
+#tebrikMessage{
+    display:none; 
+    position:fixed; 
+    top:50%; 
+    left:50%; 
+    transform:translate(-50%,-50%);
+    color:#FFD700; 
+    font-size:32px; 
+    text-align:center; 
+    background:rgba(0,0,0,0.6);
+    padding:20px 40px; 
+    border-radius:20px; 
+    z-index:10;
+}
 </style>
 </head>
 
@@ -70,6 +86,11 @@ video{
 
 <button id="btn"></button>
 <video id="v" controls></video>
+
+<div id="tebrikMessage">
+    Tebrikler 🎉<br>
+    Bir daha ki siparişinizde <strong>60 TL değerinde Türk Kahvesi</strong> kazandınız!
+</div>
 
 <script>
 // Burçlar
@@ -100,21 +121,34 @@ const secilen = burc && burclar[burc] ? burc : "koc";
 const btn = document.getElementById("btn");
 btn.innerText = burclar[secilen];
 
+// video ve mesaj elementleri
+const v = document.getElementById("v");
+const tebrik = document.getElementById("tebrikMessage");
+
 // butona tıklayınca video aç
 btn.onclick = function(){
-    const v = document.getElementById("v");
     v.src = secilen + "/" + secilen + ".mp4";
     v.style.display = "block";
     v.play();
 
-    // Müşteri ID loglama
     console.log("Müşteri ID:", id);
-};
 
-// videoya tıklayınca kapat
-document.getElementById("v").onclick = function(){
-    this.pause();
-    this.style.display = "none";
+    // Videoya tıklayınca kapat
+    v.onclick = function(){
+        this.pause();
+        this.style.display = "none";
+        tebrik.style.display = "none"; // Mesajı da gizle
+    };
+
+    // Video bittiğinde 10 saniyelik tebrik mesajı
+    v.addEventListener("ended", () => {
+        tebrik.style.display = "block";
+
+        setTimeout(() => {
+            tebrik.style.display = "none";  // 10 saniye sonra mesaj kaybolur
+            v.style.display = "none";       // video ekranı kapanır
+        }, 10000); // 10000 ms = 10 saniye
+    });
 };
 </script>
 
