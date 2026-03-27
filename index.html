@@ -61,20 +61,25 @@ video{
     background:black;
 }
 
-/* TEBRİK MESAJI */
+/* TEBRİK MESAJI TAM EKRAN */
 #tebrikMessage{
-    display:none; 
-    position:fixed; 
-    top:50%; 
-    left:50%; 
-    transform:translate(-50%,-50%);
-    color:#FFD700; 
-    font-size:32px; 
-    text-align:center; 
-    background:rgba(0,0,0,0.6);
-    padding:20px 40px; 
-    border-radius:20px; 
-    z-index:10;
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color:black; /* Ekranı tamamen karartır */
+    color:#FFD700;
+    font-size:32px;
+    text-align:center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    opacity:0;
+    transition: opacity 1s ease-in-out;
+    z-index:20;
 }
 </style>
 </head>
@@ -137,17 +142,24 @@ btn.onclick = function(){
     v.onclick = function(){
         this.pause();
         this.style.display = "none";
-        tebrik.style.display = "none"; // Mesajı da gizle
+        tebrik.style.opacity = 0;
+        setTimeout(() => { tebrik.style.display = 'none'; }, 1000);
     };
 
-    // Video bittiğinde 10 saniyelik tebrik mesajı
+    // Video bittiğinde 10 saniyelik fade-in/fade-out tebrik mesajı
     v.addEventListener("ended", () => {
-        tebrik.style.display = "block";
+        // Video kapanıyor
+        v.style.display = "none";
 
+        // Mesaj ekranı görünür
+        tebrik.style.display = "flex";
+        setTimeout(() => { tebrik.style.opacity = 1; }, 50); // fade-in
+
+        // 10 saniye sonra fade-out
         setTimeout(() => {
-            tebrik.style.display = "none";  // 10 saniye sonra mesaj kaybolur
-            v.style.display = "none";       // video ekranı kapanır
-        }, 10000); // 10000 ms = 10 saniye
+            tebrik.style.opacity = 0;
+            setTimeout(() => { tebrik.style.display = "none"; }, 1000);
+        }, 10000);
     });
 };
 </script>
